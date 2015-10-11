@@ -6,25 +6,18 @@
 package blackjack;
 
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
 import javax.swing.*;
 
 /**
  *
  * @author Chad
  */
-public class WelcomePanel extends JComponent
+public class WelcomePanel extends BasePanel
 {
-    private Image bgImage;
-    public static int width;
-    public static int height;
-
     public WelcomePanel(String imgSrc)
     {
-        bgImage = new ImageIcon(imgSrc).getImage();
-        width = bgImage.getWidth(this);
-        height = bgImage.getHeight(this);
+        super(imgSrc);
         setLayout(null);
         
         JButton newGameButton = new JButton("New Game");
@@ -35,9 +28,9 @@ public class WelcomePanel extends JComponent
         add(loadGameButton);
         add(quitButton);
         
-        newGameButton.setBounds(width/2-60, height/2+30, 120, 42);
-        loadGameButton.setBounds(width/2-60, height/2+100, 120, 42);
-        quitButton.setBounds(width/2-60, height/2+170, 120, 42);
+        newGameButton.setBounds(WIDTH/2-60, HEIGHT/2+30, 120, 42);
+        loadGameButton.setBounds(WIDTH/2-60, HEIGHT/2+100, 120, 42);
+        quitButton.setBounds(WIDTH/2-60, HEIGHT/2+170, 120, 42);
         
         quitButton.addActionListener(new ActionListener()
         {
@@ -49,18 +42,5 @@ public class WelcomePanel extends JComponent
         });
         
         newGameButton.addActionListener(null);
-    }
-    
-    public void paintComponent(Graphics g)
-    {
-        if (bgImage != null)
-        {
-            g.drawImage(bgImage, 0, 0, null);
-        }
-    }
-    
-    public Dimension getPreferredSize()
-    {
-        return new Dimension(width, height);
     }
 }

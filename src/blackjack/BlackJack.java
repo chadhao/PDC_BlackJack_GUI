@@ -5,6 +5,8 @@
  */
 package blackjack;
 
+import java.awt.EventQueue;
+
 /**
  *
  * @author Chad
@@ -15,7 +17,18 @@ public class BlackJack {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        EventQueue.invokeLater(new Runnable()
+        {
+
+            @Override
+            public void run()
+            {
+                BlackjackFrame gameFrame = new BlackjackFrame();
+                WelcomePanel welcomePanel = new WelcomePanel("img/bg.png");
+                gameFrame.add(welcomePanel);
+                gameFrame.setVisible(true);
+            }
+        });
     }
     
 }

@@ -24,26 +24,30 @@ public class LoadGamePanel extends BasePanel
         JButton playButton = new JButton("Play");
         JButton backButton = new JButton("Back");
         
-        add(savedList);
-        add(playButton);
-        add(backButton);
-        
-        
         if (savedData.length != 0)
         {
             savedList.setSelectedIndex(0);
         }
         savedList.setVisibleRowCount(5);
-        if (savedData.length > savedList.getVisibleRowCount())
-        {
-            savedList.add(new JScrollPane(savedList));
-        }
-        
         savedList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         savedList.setFixedCellHeight(22);
         savedList.setFont(new Font("", Font.PLAIN, 16));
-        savedList.setBounds(WIDTH/2-125, HEIGHT/2, 250, 110);
         
+        if (savedData.length > savedList.getVisibleRowCount())
+        {
+            JScrollPane scrollList = new JScrollPane(savedList);
+            scrollList.setBorder(null);
+            add(scrollList);
+            scrollList.setBounds(WIDTH/2-125, HEIGHT/2, 250, 110);
+        }
+        else
+        {
+            add(savedList);
+            savedList.setBounds(WIDTH/2-125, HEIGHT/2, 250, 110);
+        }
+        
+        add(playButton);
+        add(backButton);
         playButton.setBounds(WIDTH/2-60, HEIGHT/2+120, 120, 42);
         backButton.setBounds(WIDTH/2-60, HEIGHT/2+190, 120, 42);
         

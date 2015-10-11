@@ -5,7 +5,6 @@
  */
 package blackjack;
 
-import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
@@ -41,6 +40,13 @@ public class WelcomePanel extends BasePanel
             }
         });
         
-        newGameButton.addActionListener(null);
+        newGameButton.addActionListener(new ActionListener()
+        {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                BlackjackFrame.cardLayout.show(getParent(), "newgame");
+            }
+        });
     }
 }

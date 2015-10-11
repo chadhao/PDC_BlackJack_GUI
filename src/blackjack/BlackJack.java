@@ -25,7 +25,9 @@ public class BlackJack {
             {
                 BlackjackFrame gameFrame = new BlackjackFrame();
                 WelcomePanel welcomePanel = new WelcomePanel("img/bg.png");
-                gameFrame.add(welcomePanel);
+                NewGamePanel newGamePanel = new NewGamePanel("img/bg.png");
+                gameFrame.add("welcome", welcomePanel);
+                gameFrame.add("newgame", newGamePanel);
                 gameFrame.setVisible(true);
             }
         });

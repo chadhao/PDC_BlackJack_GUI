@@ -16,12 +16,14 @@ public class BlackjackFrame extends JFrame
 {
     public static final int DEFAULT_WIDTH = 450;
     public static final int DEFAULT_HEIGHT = 600;
+    public static CardLayout cardLayout;
 
     public BlackjackFrame()
     {
+        cardLayout = new CardLayout();
         setSize(DEFAULT_WIDTH, DEFAULT_HEIGHT);
         setLocationRelativeTo(null);
-        setLayout(new CardLayout());
+        setLayout(cardLayout);
         setTitle("Blackjack");
         setResizable(false);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

@@ -47,6 +47,8 @@ public class WelcomePanel extends JComponent
                 System.exit(0);
             }
         });
+        
+        newGameButton.addActionListener(null);
     }
     
     public void paintComponent(Graphics g)

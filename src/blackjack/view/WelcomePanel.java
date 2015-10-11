@@ -48,5 +48,14 @@ public class WelcomePanel extends BasePanel
                 BlackjackFrame.cardLayout.show(getParent(), "newgame");
             }
         });
+        
+        loadGameButton.addActionListener(new ActionListener()
+        {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                BlackjackFrame.cardLayout.show(getParent(), "loadgame");
+            }
+        });
     }
 }

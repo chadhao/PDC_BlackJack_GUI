@@ -5,8 +5,7 @@
  */
 package blackjack.view;
 
-import java.awt.Color;
-import java.awt.Font;
+import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
@@ -37,10 +36,10 @@ public class NewGamePanel extends BasePanel
         
         nameField.setHorizontalAlignment(JTextField.CENTER);
         nameField.setFont(new Font("", Font.BOLD, 16));
-        nameField.setBounds(WIDTH/2-100, HEIGHT/2+60, 200, 42);
+        nameField.setBounds(WIDTH/2-100, HEIGHT/2+60, 200, 40);
         
         playButton.setBounds(WIDTH/2-60, HEIGHT/2+110, 120, 42);
-        backButton.setBounds(WIDTH/2-60, HEIGHT/2+170, 120, 42);
+        backButton.setBounds(WIDTH/2-60, HEIGHT/2+180, 120, 42);
         
         backButton.addActionListener(new ActionListener()
         {

@@ -13,22 +13,25 @@ import java.awt.EventQueue;
  * @author Chad
  */
 public class BlackJack {
-
+    private static final String IMG_SRC = "img/bg.png";
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        String[] strings = {"aaa", "bbb", "ccc", "ddd", "eee", "fff"};
+        
         EventQueue.invokeLater(new Runnable()
         {
-
             @Override
             public void run()
             {
                 BlackjackFrame gameFrame = new BlackjackFrame();
-                WelcomePanel welcomePanel = new WelcomePanel("img/bg.png");
-                NewGamePanel newGamePanel = new NewGamePanel("img/bg.png");
+                WelcomePanel welcomePanel = new WelcomePanel(IMG_SRC);
+                NewGamePanel newGamePanel = new NewGamePanel(IMG_SRC);
+                LoadGamePanel loadGamePanel = new LoadGamePanel(IMG_SRC, strings);
                 gameFrame.add("welcome", welcomePanel);
                 gameFrame.add("newgame", newGamePanel);
+                gameFrame.add("loadgame", loadGamePanel);
                 gameFrame.setVisible(true);
             }
         });

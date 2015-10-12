@@ -5,6 +5,7 @@
  */
 package blackjack;
 
+import blackjack.controller.*;
 import blackjack.view.*;
 import java.awt.EventQueue;
 

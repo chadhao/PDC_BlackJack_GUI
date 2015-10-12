@@ -53,8 +53,7 @@ public class LoadGamePanel extends BasePanel
         
         add(playButton);
         add(backButton);
-        playButton.setBorder(null);
-        backButton.setBorder(null);
+        
         playButton.setBounds(WIDTH/2-60, HEIGHT/2+120, 120, 42);
         backButton.setBounds(WIDTH/2-60, HEIGHT/2+190, 120, 42);
         

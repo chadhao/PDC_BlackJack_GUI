@@ -15,14 +15,18 @@ import javax.swing.*;
  */
 public class LoadGamePanel extends BasePanel
 {
+    JList<String> savedList;
+    JButton playButton;
+    JButton backButton;
+    
     public LoadGamePanel(String imgSrc, String[] savedData)
     {
         super(imgSrc);
         setLayout(null);
         
-        JList<String> savedList = new JList<>(savedData);
-        JButton playButton = new JButton("Play");
-        JButton backButton = new JButton("Back");
+        savedList = new JList<>(savedData);
+        playButton = new JButton("Play");
+        backButton = new JButton("Back");
         
         if (savedData.length != 0)
         {

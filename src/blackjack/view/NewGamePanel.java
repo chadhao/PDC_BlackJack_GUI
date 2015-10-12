@@ -15,15 +15,20 @@ import javax.swing.*;
  */
 public class NewGamePanel extends BasePanel
 {
+    private JLabel nameLabel;
+    private JTextField nameField;
+    private JButton playButton;
+    private JButton backButton;
+    
     public NewGamePanel(String imgSrc)
     {
         super(imgSrc);
         setLayout(null);
         
-        JLabel nameLabel = new JLabel("Player Name", JLabel.CENTER);
-        JTextField nameField = new JTextField();
-        JButton playButton = new JButton("Play");
-        JButton backButton = new JButton("Back");
+        nameLabel = new JLabel("Player Name", JLabel.CENTER);
+        nameField = new JTextField();
+        playButton = new JButton("Play");
+        backButton = new JButton("Back");
         
         add(nameLabel);
         add(nameField);
@@ -46,6 +51,7 @@ public class NewGamePanel extends BasePanel
             @Override
             public void actionPerformed(ActionEvent e)
             {
+                nameField.setText("");
                 BlackjackFrame.cardLayout.show(getParent(), "welcome");
             }
         });

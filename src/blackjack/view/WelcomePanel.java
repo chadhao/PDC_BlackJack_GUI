@@ -14,6 +14,10 @@ import javax.swing.*;
  */
 public class WelcomePanel extends BasePanel
 {
+    JButton newGameButton;
+    JButton loadGameButton;
+    JButton quitButton;
+    
     public WelcomePanel(String imgSrc)
     {
         super(imgSrc);

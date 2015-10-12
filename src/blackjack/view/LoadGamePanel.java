@@ -46,12 +46,15 @@ public class LoadGamePanel extends BasePanel
         }
         else
         {
+            savedList.setBorder(null);
             add(savedList);
             savedList.setBounds(WIDTH/2-125, HEIGHT/2, 250, 110);
         }
         
         add(playButton);
         add(backButton);
+        playButton.setBorder(null);
+        backButton.setBorder(null);
         playButton.setBounds(WIDTH/2-60, HEIGHT/2+120, 120, 42);
         backButton.setBounds(WIDTH/2-60, HEIGHT/2+190, 120, 42);
         

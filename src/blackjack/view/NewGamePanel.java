@@ -41,8 +41,11 @@ public class NewGamePanel extends BasePanel
         
         nameField.setHorizontalAlignment(JTextField.CENTER);
         nameField.setFont(new Font("", Font.BOLD, 16));
+        nameField.setBorder(null);
         nameField.setBounds(WIDTH/2-100, HEIGHT/2+60, 200, 40);
         
+        playButton.setBorder(null);
+        backButton.setBorder(null);
         playButton.setBounds(WIDTH/2-60, HEIGHT/2+110, 120, 42);
         backButton.setBounds(WIDTH/2-60, HEIGHT/2+180, 120, 42);
         

@@ -31,6 +31,10 @@ public class WelcomePanel extends BasePanel
         add(loadGameButton);
         add(quitButton);
         
+        newGameButton.setBorder(null);
+        loadGameButton.setBorder(null);
+        quitButton.setBorder(null);
+        
         newGameButton.setBounds(WIDTH/2-60, HEIGHT/2+30, 120, 42);
         loadGameButton.setBounds(WIDTH/2-60, HEIGHT/2+100, 120, 42);
         quitButton.setBounds(WIDTH/2-60, HEIGHT/2+170, 120, 42);

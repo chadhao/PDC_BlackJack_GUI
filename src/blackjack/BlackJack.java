@@ -8,6 +8,7 @@ package blackjack;
 import blackjack.controller.*;
 import blackjack.view.*;
 import java.awt.EventQueue;
+import java.sql.*;
 
 /**
  *
@@ -15,6 +16,7 @@ import java.awt.EventQueue;
  */
 public class BlackJack {
     private static final String IMG_SRC = "img/bg.png";
+    public static User aUser = new User();
     /**
      * @param args the command line arguments
      */

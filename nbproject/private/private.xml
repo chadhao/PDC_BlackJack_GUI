@@ -5,9 +5,11 @@
         <group>
             <file>file:/Users/Chad/Documents/workspace/java/PDC/PDC_BlackJack_GUI/src/blackjack/view/WelcomePanel.java</file>
             <file>file:/Users/Chad/Documents/workspace/java/PDC/PDC_BlackJack_GUI/src/blackjack/BlackJack.java</file>
+            <file>file:/Users/Chad/Documents/workspace/java/PDC/PDC_BlackJack_GUI/src/blackjack/view/BlackjackFrame.java</file>
             <file>file:/Users/Chad/Documents/workspace/java/PDC/PDC_BlackJack_GUI/src/blackjack/controller/User.java</file>
             <file>file:/Users/Chad/Documents/workspace/java/PDC/PDC_BlackJack_GUI/src/blackjack/view/NewGamePanel.java</file>
             <file>file:/Users/Chad/Documents/workspace/java/PDC/PDC_BlackJack_GUI/src/blackjack/view/GamePanel.java</file>
+            <file>file:/Users/Chad/Documents/workspace/java/PDC/PDC_BlackJack_GUI/src/blackjack/model/DBOps.java</file>
             <file>file:/Users/Chad/Documents/workspace/java/PDC/PDC_BlackJack_GUI/src/blackjack/view/LoadGamePanel.java</file>
         </group>
     </open-files>

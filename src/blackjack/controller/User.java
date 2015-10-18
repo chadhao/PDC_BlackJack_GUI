@@ -64,14 +64,37 @@ public class User
     
     public User getUserByName(String username)
     {
-        return new User();
+        int ID;
+        int chips;
+        int win;
+        int lose;
+        int push;
+        try
+        {
+            ResultSet nameSet = DBOps.exeQuery("SELECT * FROM USERS WHERE USERNAME = \'" + username);
+            while(nameSet.next())
+            {
+                ID = nameSet.getInt("ID");
+                chips = nameSet.getInt("CHIPS");
+                win = nameSet.getInt("WIN");
+                lose = nameSet.getInt("LOSE");
+                push = nameSet.getInt("PUSH");
+                return new User(ID, username, chips, win, lose, push);
+            }
+        }
+        catch (SQLException sqle)
+        {
+            return null;
+        }
+        return null;
     }
     
     public boolean addUser(String username)
     {
         this.username = username;
         this.chips = 1000;
-        String SQLCommand = "INSERT INTO USERS (USERNAME, CHIPS) VALUES (\"" + this.username + "\", " + this.chips;
+        String SQLCommand = "INSERT INTO USERS (USERNAME, CHIPS) VALUES (\'" + this.username + "\', " + this.chips + ")";
+        System.out.println(SQLCommand);
         try
         {
             DBOps.exeUpdate(SQLCommand);

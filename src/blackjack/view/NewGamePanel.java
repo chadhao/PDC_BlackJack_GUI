@@ -8,6 +8,9 @@ package blackjack.view;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
+import java.sql.*;
+import blackjack.*;
+import blackjack.controller.User;
 
 /**
  *
@@ -19,6 +22,7 @@ public class NewGamePanel extends BasePanel
     private JTextField nameField;
     private JButton playButton;
     private JButton backButton;
+    private JDialog msgBox;
     
     public NewGamePanel(String imgSrc)
     {
@@ -57,6 +61,30 @@ public class NewGamePanel extends BasePanel
             }
         });
         
-        
+        playButton.addActionListener(new ActionListener()
+        {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                if (User.hasUser(nameField.getText()))
+                {
+                    nameField.setEnabled(false);
+                    nameField.setText("User already existed!");
+                }
+                else
+                {
+                    System.out.println(User.hasUser(nameField.getText()));
+                    nameField.setEnabled(false);
+                    if (BlackJack.aUser.addUser(nameField.getText()))
+                    {
+                        nameField.setText("Successful!");
+                    }
+                    else
+                    {
+                        nameField.setText("Error adding new user!");
+                    }
+                }
+            }
+        });
     }
 }

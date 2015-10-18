@@ -6,6 +6,7 @@
 package blackjack;
 
 import blackjack.controller.*;
+import blackjack.model.Player;
 import blackjack.view.*;
 import java.awt.EventQueue;
 import java.sql.*;
@@ -16,13 +17,12 @@ import java.sql.*;
  */
 public class BlackJack {
     private static final String IMG_SRC = "img/bg.png";
-    public static User aUser = new User();
+    public static Player player;
+    public static Player dealer;
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        String[] strings = {"aaa", "bbb", "ccc", "ddd", "eee", "fff"};
-        
         EventQueue.invokeLater(new Runnable()
         {
             @Override
@@ -31,7 +31,7 @@ public class BlackJack {
                 BlackjackFrame gameFrame = new BlackjackFrame();
                 WelcomePanel welcomePanel = new WelcomePanel(IMG_SRC);
                 NewGamePanel newGamePanel = new NewGamePanel(IMG_SRC);
-                LoadGamePanel loadGamePanel = new LoadGamePanel(IMG_SRC, strings);
+                LoadGamePanel loadGamePanel = new LoadGamePanel(IMG_SRC);
                 gameFrame.add("welcome", welcomePanel);
                 gameFrame.add("newgame", newGamePanel);
                 gameFrame.add("loadgame", loadGamePanel);

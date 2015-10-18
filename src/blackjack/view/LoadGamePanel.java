@@ -8,6 +8,7 @@ package blackjack.view;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
+import blackjack.controller.*;
 
 /**
  *
@@ -19,10 +20,11 @@ public class LoadGamePanel extends BasePanel
     JButton playButton;
     JButton backButton;
     
-    public LoadGamePanel(String imgSrc, String[] savedData)
+    public LoadGamePanel(String imgSrc)
     {
         super(imgSrc);
         setLayout(null);
+        String[] savedData = User.getUserList();
         
         savedList = new JList<>(savedData);
         playButton = new JButton("Play");
@@ -42,13 +44,13 @@ public class LoadGamePanel extends BasePanel
             JScrollPane scrollList = new JScrollPane(savedList);
             scrollList.setBorder(null);
             add(scrollList);
-            scrollList.setBounds(WIDTH/2-125, HEIGHT/2, 250, 110);
+            scrollList.setBounds(WIDTH/2-150, HEIGHT/2, 300, 110);
         }
         else
         {
             savedList.setBorder(null);
             add(savedList);
-            savedList.setBounds(WIDTH/2-125, HEIGHT/2, 250, 110);
+            savedList.setBounds(WIDTH/2-150, HEIGHT/2, 300, 110);
         }
         
         add(playButton);
@@ -63,6 +65,16 @@ public class LoadGamePanel extends BasePanel
             public void actionPerformed(ActionEvent e)
             {
                 BlackjackFrame.cardLayout.show(getParent(), "welcome");
+            }
+        });
+        
+        playButton.addActionListener(new ActionListener()
+        {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                String selectedUsername = savedList.getSelectedValue().split("\\[")[1].split("\\]")[0];
+                User.initPlayer(selectedUsername);
             }
         });
     }

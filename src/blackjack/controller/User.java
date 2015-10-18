@@ -5,8 +5,9 @@
  */
 package blackjack.controller;
 
-import blackjack.model.DBOps;
+import blackjack.model.*;
 import java.sql.*;
+import java.util.ArrayList;
 
 /**
  *
@@ -62,7 +63,7 @@ public class User
         return false;
     }
     
-    public User getUserByName(String username)
+    public static User getUserByName(String username)
     {
         int ID;
         int chips;
@@ -89,11 +90,35 @@ public class User
         return null;
     }
     
-    public boolean addUser(String username)
+    public static String[] getUserList()
     {
-        this.username = username;
-        this.chips = 1000;
-        String SQLCommand = "INSERT INTO USERS (USERNAME, CHIPS) VALUES (\'" + this.username + "\', " + this.chips + ")";
+        ArrayList<String> userList = new ArrayList<>();
+        try
+        {
+            ResultSet nameSet = DBOps.exeQuery("SELECT * FROM USERS");
+            while(nameSet.next())
+            {
+                userList.add(nameSet.getInt("ID") + "| [" + nameSet.getString("USERNAME") + "] "
+                + nameSet.getInt("CHIPS") + " chips W" + nameSet.getInt("WIN")
+                + "|L" + nameSet.getInt("LOSE") + "|P" + nameSet.getInt("PUSH"));
+            }
+        }
+        catch (Exception e)
+        {
+        }
+        String[] stringArray = userList.toArray(new String[userList.size()]);
+        return stringArray;
+    }
+    
+    public static Player initPlayer(String username)
+    {
+        User aUser = getUserByName(username);
+        return new Player(aUser.getUsername(), aUser.getChips(), aUser.getWin(), aUser.getLose(), aUser.getPush());
+    }
+    
+    public static boolean addUser(String username)
+    {
+        String SQLCommand = "INSERT INTO USERS (USERNAME, CHIPS) VALUES (\'" + username + "\', 1000)";
         System.out.println(SQLCommand);
         try
         {
@@ -114,31 +139,6 @@ public class User
     public void updateUser(User aUser)
     {
         
-    }
-    
-    private void setUsername(String username)
-    {
-        this.username = username;
-    }
-    
-    private void setChips(int chips)
-    {
-        this.chips = chips;
-    }
-    
-    private void setWin(int win)
-    {
-        this.win = win;
-    }
-    
-    private void setLose(int lose)
-    {
-        this.lose = lose;
-    }
-    
-    private void setPush(int push)
-    {
-        this.push = push;
     }
     
     public int getID()

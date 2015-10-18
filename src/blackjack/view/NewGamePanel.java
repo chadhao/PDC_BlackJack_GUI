@@ -75,7 +75,7 @@ public class NewGamePanel extends BasePanel
                 {
                     System.out.println(User.hasUser(nameField.getText()));
                     nameField.setEnabled(false);
-                    if (BlackJack.aUser.addUser(nameField.getText()))
+                    if (User.addUser(nameField.getText()))
                     {
                         nameField.setText("Successful!");
                     }

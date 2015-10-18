@@ -55,6 +55,26 @@ public class User
         return true;
     }
     
+    public static boolean isDatabaseEmpty()
+    {
+        try
+        {
+            ResultSet numOfRows = DBOps.exeQuery("SELECT COUNT(*) FROM USERS");
+            while(numOfRows.next())
+            {
+                if (numOfRows.getInt(1) == 0)
+                {
+                    return true;
+                }
+            }
+        }
+        catch (SQLException sqle)
+        {
+            return true;
+        }
+        return false;
+    }
+    
     public static boolean hasUser(String username)
     {
         try

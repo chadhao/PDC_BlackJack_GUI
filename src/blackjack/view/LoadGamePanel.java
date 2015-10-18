@@ -10,6 +10,8 @@ import java.awt.event.*;
 import javax.swing.*;
 import blackjack.controller.*;
 import blackjack.*;
+import javax.swing.event.ListDataEvent;
+import javax.swing.event.ListDataListener;
 
 /**
  *
@@ -17,15 +19,16 @@ import blackjack.*;
  */
 public class LoadGamePanel extends BasePanel
 {
-    JList<String> savedList;
-    JButton playButton;
-    JButton backButton;
+    private JList<String> savedList;
+    private JButton playButton;
+    private JButton backButton;
+    private String[] savedData;
     
     public LoadGamePanel(String imgSrc)
     {
         super(imgSrc);
         setLayout(null);
-        String[] savedData = User.getUserList();
+        savedData = User.getUserList();
         
         savedList = new JList<>(savedData);
         playButton = new JButton("Play");
@@ -76,6 +79,16 @@ public class LoadGamePanel extends BasePanel
             {
                 String selectedUsername = savedList.getSelectedValue().split("\\[")[1].split("\\]")[0];
                 BlackJack.player = User.initPlayer(selectedUsername);
+            }
+        });
+        
+        this.addComponentListener(new ComponentAdapter()
+        {
+            @Override
+            public void componentShown(ComponentEvent e)
+            {
+                savedData = User.getUserList();
+                savedList.setListData(savedData);
             }
         });
     }

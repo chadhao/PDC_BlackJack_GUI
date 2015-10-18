@@ -7,6 +7,7 @@ package blackjack.view;
 
 import java.awt.event.*;
 import javax.swing.*;
+import blackjack.controller.*;
 
 /**
  *
@@ -35,6 +36,11 @@ public class WelcomePanel extends BasePanel
         loadGameButton.setBounds(WIDTH/2-60, HEIGHT/2+100, 120, 42);
         quitButton.setBounds(WIDTH/2-60, HEIGHT/2+170, 120, 42);
         
+        if (User.isDatabaseEmpty())
+        {
+            loadGameButton.setEnabled(false);
+        }
+        
         quitButton.addActionListener(new ActionListener()
         {
             @Override
@@ -61,5 +67,15 @@ public class WelcomePanel extends BasePanel
                 BlackjackFrame.cardLayout.show(getParent(), "loadgame");
             }
         });
+        
+        this.addComponentListener(new ComponentAdapter()
+        {
+            @Override
+            public void componentShown(ComponentEvent e)
+            {
+                loadGameButton.setEnabled(User.isDatabaseEmpty()?false:true);
+            }
+        });
+        
     }
 }

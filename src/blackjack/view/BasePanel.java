@@ -28,6 +28,7 @@ public class BasePanel extends JComponent
         bgImage = new ImageIcon(imgSrc).getImage();
     }
     
+    @Override
     public void paintComponent(Graphics g)
     {
         if (bgImage != null)
@@ -41,6 +42,7 @@ public class BasePanel extends JComponent
         }
     }
     
+    @Override
     public Dimension getPreferredSize()
     {
         return new Dimension(WIDTH, HEIGHT);

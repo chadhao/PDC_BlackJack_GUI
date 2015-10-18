@@ -32,9 +32,11 @@ public class BlackJack {
                 WelcomePanel welcomePanel = new WelcomePanel(IMG_SRC);
                 NewGamePanel newGamePanel = new NewGamePanel(IMG_SRC);
                 LoadGamePanel loadGamePanel = new LoadGamePanel(IMG_SRC);
+                GamePanel gamePanel = new GamePanel();
                 gameFrame.add("welcome", welcomePanel);
                 gameFrame.add("newgame", newGamePanel);
                 gameFrame.add("loadgame", loadGamePanel);
+                gameFrame.add("game", gamePanel);
                 gameFrame.setVisible(true);
             }
         });

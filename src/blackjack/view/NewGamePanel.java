@@ -8,9 +8,8 @@ package blackjack.view;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
-import java.sql.*;
+import blackjack.controller.*;
 import blackjack.*;
-import blackjack.controller.User;
 
 /**
  *
@@ -57,6 +56,7 @@ public class NewGamePanel extends BasePanel
             public void actionPerformed(ActionEvent e)
             {
                 nameField.setText("");
+                playButton.setEnabled(true);
                 BlackjackFrame.cardLayout.show(getParent(), "welcome");
             }
         });
@@ -66,25 +66,49 @@ public class NewGamePanel extends BasePanel
             @Override
             public void actionPerformed(ActionEvent e)
             {
-                if (User.hasUser(nameField.getText()))
+                playButton.setEnabled(false);
+                if (nameField.getText().isEmpty())
                 {
-                    nameField.setEnabled(false);
-                    nameField.setText("User already existed!");
+                    nameField.setText("Empty username!");
+                }
+                else if (!User.checkUsername(nameField.getText()))
+                {
+                    nameField.setText("Characters and numbers only!");
+                }
+                else if (User.hasUser(nameField.getText()))
+                {
+                    nameField.setText("User already exists!");
                 }
                 else
                 {
-                    System.out.println(User.hasUser(nameField.getText()));
-                    nameField.setEnabled(false);
                     if (User.addUser(nameField.getText()))
                     {
-                        nameField.setText("Successful!");
+                        BlackJack.player = User.initPlayer(nameField.getText());
                     }
                     else
                     {
-                        nameField.setText("Error adding new user!");
+                        nameField.setText("Failed creating player!");
                     }
                 }
             }
         });
+        
+        nameField.addFocusListener(new FocusListener()
+        {
+            @Override
+            public void focusGained(FocusEvent e)
+            {
+                nameField.setText("");
+                playButton.setEnabled(true);
+            }
+
+            @Override
+            public void focusLost(FocusEvent e)
+            {
+                
+            }
+        });
     }
+    
+    
 }

@@ -42,6 +42,19 @@ public class User
         this.push = push;
     }
     
+    public static boolean checkUsername(String username)
+    {
+        for (char aChar : username.toCharArray())
+        {
+            if (!((aChar >= '0' && aChar <= '9') || (aChar >= 'a' && aChar <= 'z') || (aChar >= 'A' && aChar <= 'Z')))
+            {
+                System.out.println(aChar);
+                return false;
+            }
+        }
+        return true;
+    }
+    
     public static boolean hasUser(String username)
     {
         try
@@ -72,7 +85,7 @@ public class User
         int push;
         try
         {
-            ResultSet nameSet = DBOps.exeQuery("SELECT * FROM USERS WHERE USERNAME = \'" + username);
+            ResultSet nameSet = DBOps.exeQuery("SELECT * FROM USERS WHERE USERNAME = \'" + username + "\'");
             while(nameSet.next())
             {
                 ID = nameSet.getInt("ID");
@@ -112,6 +125,10 @@ public class User
     
     public static Player initPlayer(String username)
     {
+//        if (!hasUser(username))
+//        {
+//            addUser(username);
+//        }
         User aUser = getUserByName(username);
         return new Player(aUser.getUsername(), aUser.getChips(), aUser.getWin(), aUser.getLose(), aUser.getPush());
     }
@@ -119,7 +136,6 @@ public class User
     public static boolean addUser(String username)
     {
         String SQLCommand = "INSERT INTO USERS (USERNAME, CHIPS) VALUES (\'" + username + "\', 1000)";
-        System.out.println(SQLCommand);
         try
         {
             DBOps.exeUpdate(SQLCommand);

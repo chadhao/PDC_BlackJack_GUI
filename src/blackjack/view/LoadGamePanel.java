@@ -9,6 +9,7 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 import blackjack.controller.*;
+import blackjack.*;
 
 /**
  *
@@ -74,7 +75,7 @@ public class LoadGamePanel extends BasePanel
             public void actionPerformed(ActionEvent e)
             {
                 String selectedUsername = savedList.getSelectedValue().split("\\[")[1].split("\\]")[0];
-                User.initPlayer(selectedUsername);
+                BlackJack.player = User.initPlayer(selectedUsername);
             }
         });
     }

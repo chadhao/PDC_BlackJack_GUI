@@ -44,6 +44,7 @@ public class GamePanel extends BasePanel
         dealerDeck = new CardDeckPanel(dealerCards);
         
         dealerDeckPanel = new JPanel();
+
         dealerDeckPanel.setLayout(new FlowLayout());
         dealerDeckPanel.setOpaque(false);
         dealerDeckPanel.add(dealerDeck);

@@ -9,6 +9,7 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 import java.util.*;
+import javax.swing.border.EmptyBorder;
 
 /**
  *
@@ -20,8 +21,13 @@ public class GamePanel extends BasePanel
     private ArrayList<String> playerInHandOne;
     private ArrayList<String> playerInHandTwo;
     private ArrayList<CardPanel> dealerCards;
-    private CardDeckPanel dealerDeck;
-    private JComponent dealerDeckPanel;
+    private ArrayList<CardPanel> playerCardsOne;
+    private ArrayList<CardPanel> playerCardsTwo;
+    private CardDeckContainer dealerDeckPanel;
+    private CardDeckContainer playerDeckOnePanel;
+    private CardDeckContainer playerDeckTwoPanel;
+    private JPanel gameStatPanel;
+    private JPanel gameButtonPanel;
     
     public GamePanel()
     {
@@ -33,22 +39,50 @@ public class GamePanel extends BasePanel
         dealerInHand.add("2D");
         dealerInHand.add("2H");
         dealerInHand.add("2S");
+        dealerInHand.add("JD");
+        dealerInHand.add("KS");
+        
+        playerInHandOne = new ArrayList<>();
+        playerInHandOne.add("3C");
+        playerInHandOne.add("3D");
+        playerInHandOne.add("3H");
+        playerInHandOne.add("3S");
+        playerInHandOne.add("JD");
+        playerInHandOne.add("KS");
+        
+        playerInHandTwo = new ArrayList<>();
+        playerInHandTwo.add("4C");
+        playerInHandTwo.add("4D");
+        playerInHandTwo.add("4H");
+        playerInHandTwo.add("4S");
+        playerInHandTwo.add("JD");
+        playerInHandTwo.add("KS");
         
         dealerCards = new ArrayList<>();
-        
         for (int i = 0; i < dealerInHand.size(); i++)
         {
             dealerCards.add(new CardPanel("img/cards/" + dealerInHand.get(i) + ".png"));
         }
         
-        dealerDeck = new CardDeckPanel(dealerCards);
+        playerCardsOne = new ArrayList<>();
+        for (int i = 0; i < playerInHandOne.size(); i++)
+        {
+            playerCardsOne.add(new CardPanel("img/cards/" + playerInHandOne.get(i) + ".png"));
+        }
         
-        dealerDeckPanel = new JPanel();
-
-        dealerDeckPanel.setLayout(new FlowLayout());
-        dealerDeckPanel.setOpaque(false);
-        dealerDeckPanel.add(dealerDeck);
+        playerCardsTwo = new ArrayList<>();
+        for (int i = 0; i < playerInHandTwo.size(); i++)
+        {
+            playerCardsTwo.add(new CardPanel("img/cards/" + playerInHandTwo.get(i) + ".png"));
+        }
+        
+        dealerDeckPanel = new CardDeckContainer(new CardDeckPanel(dealerCards));
+        playerDeckOnePanel = new CardDeckContainer(new CardDeckPanel(playerCardsOne));
+        playerDeckTwoPanel = new CardDeckContainer(new CardDeckPanel(playerCardsTwo));
+        
         add(dealerDeckPanel);
+        add(playerDeckOnePanel);
+        add(playerDeckTwoPanel);
         
     }
     

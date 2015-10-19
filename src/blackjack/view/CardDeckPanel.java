@@ -23,17 +23,30 @@ public class CardDeckPanel extends JComponent
     public CardDeckPanel(ArrayList<CardPanel> cards)
     {
         setLayout(null);
-        WIDTH = 100 + (cards.size() - 1) * 25;
+        if (cards.size() <= 5)
+        {
+            WIDTH = 100 + (cards.size() - 1) * 50;
+        }
+        else
+        {
+            WIDTH = 100 + (cards.size() - 1) * 25;
+        }
         
         for (int i = cards.size()-1; i >= 0; i--)
         {
             add(cards.get(i));
             cards.get(i).setBorder(new LineBorder(Color.BLACK, 1));
-            cards.get(i).setBounds(i*25, 0, CardPanel.WIDTH, CardPanel.HEIGHT);
+            if (cards.size() <= 5)
+            {
+                cards.get(i).setBounds(i*50, 0, CardPanel.WIDTH, CardPanel.HEIGHT);
+            }
+            else
+            {
+                cards.get(i).setBounds(i*25, 0, CardPanel.WIDTH, CardPanel.HEIGHT);
+            }
+            
         }
     }
-    
-    
     
     @Override
     public Dimension getPreferredSize()

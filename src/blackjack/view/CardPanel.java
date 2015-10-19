@@ -17,7 +17,7 @@ public class CardPanel extends JComponent
     private Image cardImage;
     public final String CARD_NAME;
     public static final int WIDTH = 100;
-    public static final int HEIGHT = 150;
+    public static final int HEIGHT = 145;
 
     public CardPanel(String imgSrc)
     {

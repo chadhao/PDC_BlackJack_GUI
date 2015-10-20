@@ -6,7 +6,7 @@
 package blackjack;
 
 import blackjack.controller.*;
-import blackjack.model.Player;
+import blackjack.model.*;
 import blackjack.view.*;
 import java.awt.EventQueue;
 import java.sql.*;
@@ -24,6 +24,12 @@ public class BlackJack {
      */
     public static void main(String[] args) {
         player = new Player("Chad", 1000, 0, 0, 0);
+        Card.shuffleCards();
+        for (int i = 0; i < 20; i++)
+        {
+            System.out.print(Card.getCard(i) + " | ");
+            System.out.println(Card.getValue(i));
+        }
         
         EventQueue.invokeLater(new Runnable()
         {

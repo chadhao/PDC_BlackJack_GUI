@@ -125,7 +125,7 @@ public class GamePanel extends BasePanel
         playButtonPanel.add(insureButton);
         playButtonPanel.add(splitButton);
         playButtonPanel.setOpaque(false);
-//        gameButtonPanel.add("betbutton", betButtonPanel);
+        gameButtonPanel.add("betbutton", betButtonPanel);
         gameButtonPanel.add("playbutton", playButtonPanel);
         gameButtonPanel.setOpaque(false);
         

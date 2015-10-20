@@ -9,7 +9,8 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 import java.util.*;
-import javax.swing.border.EmptyBorder;
+import javax.swing.border.*;
+import blackjack.*;
 
 /**
  *
@@ -27,7 +28,11 @@ public class GamePanel extends BasePanel
     private CardDeckContainer playerDeckOnePanel;
     private CardDeckContainer playerDeckTwoPanel;
     private JPanel gameStatPanel;
+    private JLabel gameStatPanelPlayerName;
+    private JLabel gameStatPanelCurrentChips;
     private JPanel gameButtonPanel;
+    private JPanel betButtonPanel;
+    private JPanel playButtonPanel;
     
     public GamePanel()
     {
@@ -80,10 +85,55 @@ public class GamePanel extends BasePanel
         playerDeckOnePanel = new CardDeckContainer(new CardDeckPanel(playerCardsOne));
         playerDeckTwoPanel = new CardDeckContainer(new CardDeckPanel(playerCardsTwo));
         
-        add(dealerDeckPanel);
-        add(playerDeckOnePanel);
-        add(playerDeckTwoPanel);
+        gameStatPanel = new JPanel();
+        gameStatPanelPlayerName = new JLabel("Player: " + BlackJack.player.getName());
+        gameStatPanelCurrentChips = new JLabel("Current chips: " + BlackJack.player.getChip());
+        gameStatPanelPlayerName.setFont(new Font("", Font.PLAIN, 14));
+        gameStatPanelPlayerName.setForeground(Color.WHITE);
+        gameStatPanelPlayerName.setBorder(new EmptyBorder(0, 0, 0, 10));
+        gameStatPanelCurrentChips.setFont(new Font("", Font.PLAIN, 14));
+        gameStatPanelCurrentChips.setForeground(Color.WHITE);
+        gameStatPanelCurrentChips.setBorder(new EmptyBorder(0, 10, 0, 0));
+        gameStatPanel.add(gameStatPanelPlayerName);
+        gameStatPanel.add(gameStatPanelCurrentChips);
+        gameStatPanel.setOpaque(false);
         
+        gameButtonPanel = new JPanel(new CardLayout());
+        betButtonPanel = new JPanel();
+        playButtonPanel = new JPanel();
+        JLabel pleaseBet = new JLabel("Please bet: ");
+        pleaseBet.setFont(new Font("", Font.PLAIN, 16));
+        pleaseBet.setForeground(Color.WHITE);
+        betButtonPanel.add(pleaseBet);
+        JTextField betField = new JTextField();
+        betField.setFont(new Font("", Font.PLAIN, 16));
+        betField.setPreferredSize(new Dimension(60, 32));
+        betButtonPanel.add(betField);
+        JButton betButton = new JButton("bet");
+        betButtonPanel.add(betButton);
+        betButtonPanel.setOpaque(false);
+        JButton hitButton = new JButton("Hit");
+        JButton standButton = new JButton("Stand");
+        JButton doubleButton = new JButton("Double");
+        JButton insureButton = new JButton("Insure");
+        insureButton.setEnabled(false);
+        JButton splitButton = new JButton("Split");
+        splitButton.setEnabled(false);
+        playButtonPanel.add(hitButton);
+        playButtonPanel.add(standButton);
+        playButtonPanel.add(doubleButton);
+        playButtonPanel.add(insureButton);
+        playButtonPanel.add(splitButton);
+        playButtonPanel.setOpaque(false);
+//        gameButtonPanel.add("betbutton", betButtonPanel);
+        gameButtonPanel.add("playbutton", playButtonPanel);
+        gameButtonPanel.setOpaque(false);
+        
+        add(gameStatPanel);
+        add(dealerDeckPanel);
+        add(playerDeckTwoPanel);
+        add(playerDeckOnePanel);
+        add(gameButtonPanel);
     }
     
 }

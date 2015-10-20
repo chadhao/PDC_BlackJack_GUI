@@ -23,6 +23,8 @@ public class BlackJack {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        player = new Player("Chad", 1000, 0, 0, 0);
+        
         EventQueue.invokeLater(new Runnable()
         {
             @Override

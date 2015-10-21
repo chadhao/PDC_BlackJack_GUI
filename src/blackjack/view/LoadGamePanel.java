@@ -78,7 +78,8 @@ public class LoadGamePanel extends BasePanel
             public void actionPerformed(ActionEvent e)
             {
                 String selectedUsername = savedList.getSelectedValue().split("\\[")[1].split("\\]")[0];
-                BlackJack.player = User.initPlayer(selectedUsername);
+                User.initPlayer(selectedUsername);
+                BlackjackFrame.cardLayout.show(getParent(), "game");
             }
         });
         

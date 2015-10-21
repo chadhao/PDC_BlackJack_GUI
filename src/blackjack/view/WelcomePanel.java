@@ -41,25 +41,14 @@ public class WelcomePanel extends BasePanel
             loadGameButton.setEnabled(false);
         }
         
-//        quitButton.addActionListener(new ActionListener()
-//        {
-//            @Override
-//            public void actionPerformed(ActionEvent e)
-//            {
-//                System.exit(0);
-//            }
-//        });
-        
-        //The code below is for temporary testing purpose
         quitButton.addActionListener(new ActionListener()
         {
             @Override
             public void actionPerformed(ActionEvent e)
             {
-                BlackjackFrame.cardLayout.show(getParent(), "game");
+                System.exit(0);
             }
         });
-        //The code above is for temporary testing purpose
         
         newGameButton.addActionListener(new ActionListener()
         {

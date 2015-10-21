@@ -83,7 +83,8 @@ public class NewGamePanel extends BasePanel
                 {
                     if (User.addUser(nameField.getText()))
                     {
-                        BlackJack.player = User.initPlayer(nameField.getText());
+                        User.initPlayer(nameField.getText());
+                        BlackjackFrame.cardLayout.show(getParent(), "game");
                     }
                     else
                     {

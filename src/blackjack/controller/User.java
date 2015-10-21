@@ -6,6 +6,7 @@
 package blackjack.controller;
 
 import blackjack.model.*;
+import blackjack.*;
 import java.sql.*;
 import java.util.ArrayList;
 
@@ -143,14 +144,18 @@ public class User
         return stringArray;
     }
     
-    public static Player initPlayer(String username)
+    public static void initPlayer(String username)
     {
 //        if (!hasUser(username))
 //        {
 //            addUser(username);
 //        }
         User aUser = getUserByName(username);
-        return new Player(aUser.getUsername(), aUser.getChips(), aUser.getWin(), aUser.getLose(), aUser.getPush());
+        BlackJack.player.setName(aUser.getUsername());
+        BlackJack.player.setChip(aUser.getChips());
+        BlackJack.player.setWin(aUser.getWin());
+        BlackJack.player.setLose(aUser.getLose());
+        BlackJack.player.setPush(aUser.getPush());
     }
     
     public static boolean addUser(String username)

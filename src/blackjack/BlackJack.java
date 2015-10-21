@@ -23,13 +23,9 @@ public class BlackJack {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        player = new Player("Chad", 1000, 0, 0, 0);
-        Card.shuffleCards();
-        for (int i = 0; i < 20; i++)
-        {
-            System.out.print(Card.getCard(i) + " | ");
-            System.out.println(Card.getValue(i));
-        }
+        player = new Player(true);
+        dealer = new Player(false);
+        System.out.println(BlackJack.player);
         
         EventQueue.invokeLater(new Runnable()
         {

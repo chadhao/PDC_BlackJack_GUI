@@ -17,58 +17,36 @@ public class Player
     private int win;
     private int lose;
     private int push;
+    private int[] bet;
     private ArrayList<Integer> handOne;
     private ArrayList<Integer> handTwo;
     private boolean isInsured;
     private boolean[] isDoubled;
     private boolean isSplit;
     
-    public Player(String name, int chip, int win, int lose, int push)
+    public Player(boolean isPlayer)
     {
-        this.name = name;
-        this.chip = chip;
-        this.win = win;
-        this.lose = lose;
-        this.push = push;
+        this.name = isPlayer?"":"Dealer";
+        this.chip = isPlayer?0:-1;
+        this.win = isPlayer?0:-1;
+        this.lose = isPlayer?0:-1;
+        this.push = isPlayer?0:-1;
+        this.bet = new int[2];
+        this.bet[0] = isPlayer?0:-1;
+        this.bet[1] = isPlayer?0:-1;
         this.isInsured = false;
         this.isDoubled = new boolean[2];
         this.isDoubled[0] = false;
         this.isDoubled[1] = false;
         this.isSplit = false;
         this.handOne = new ArrayList<>();
-        this.handTwo = new ArrayList<>();
+        this.handTwo = isPlayer?new ArrayList<>():null;
     }
-    
-    public Player(String name, int chip)
+
+    @Override
+    public String toString()
     {
-        this.name = name;
-        this.chip = chip;
-        this.win = 0;
-        this.lose = 0;
-        this.push = 0;
-        this.isInsured = false;
-        this.isDoubled = new boolean[2];
-        this.isDoubled[0] = false;
-        this.isDoubled[1] = false;
-        this.isSplit = false;
-        this.handOne = new ArrayList<>();
-        this.handTwo = new ArrayList<>();
-    }
-    
-    public Player()
-    {
-        this.name = "Dealer";
-        this.chip = -1;
-        this.win = -1;
-        this.lose = -1;
-        this.push = -1;
-        this.isInsured = false;
-        this.isDoubled = new boolean[2];
-        this.isDoubled[0] = false;
-        this.isDoubled[1] = false;
-        this.isSplit = false;
-        this.handOne = new ArrayList<>();
-        this.handTwo = null;
+        return "Name: " + name + " | Chips: " + chip + " | Win: " + win + " | Lose: " + lose + " | Push: " + push;
     }
     
     public String getName()
@@ -145,5 +123,41 @@ public class Player
     public void addPush()
     {
 	this.push++;
+    }
+    
+    public void setName(String name)
+    {
+        this.name = name;
+    }
+    
+    public void setWin(int win)
+    {
+        this.win = win;
+    }
+    
+    public void setLose(int lose)
+    {
+        this.lose = lose;
+    }
+    
+    public void setPush(int push)
+    {
+        this.push = push;
+    }
+    
+    public int getBet(int whichHand)
+    {
+        return this.bet[whichHand];
+    }
+    
+    public void setBet(int whichHand, int bet)
+    {
+        this.bet[whichHand] = bet;
+    }
+    
+    public void setBet(int bet)
+    {
+        this.bet[0] = bet;
+        this.bet[1] = bet;
     }
 }

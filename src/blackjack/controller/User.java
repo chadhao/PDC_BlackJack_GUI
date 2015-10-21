@@ -146,10 +146,6 @@ public class User
     
     public static void initPlayer(String username)
     {
-//        if (!hasUser(username))
-//        {
-//            addUser(username);
-//        }
         User aUser = getUserByName(username);
         BlackJack.player.setName(aUser.getUsername());
         BlackJack.player.setChip(aUser.getChips());

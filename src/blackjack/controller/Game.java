@@ -70,7 +70,7 @@ public class Game
             GamePanel.dealerDeckContainer.repaint();
             GamePanel.playerDeckOneContainer.removeAll();
             GamePanel.playerStatOnePoint.setText(totalValue(1) + " points");
-            GamePanel.playerStatOneDescription.setText("test");
+            GamePanel.playerStatOneDescription.setText("");
             GamePanel.playerDeckOneContainer.add(GamePanel.playerStatOneContainer);
             GamePanel.playerDeckOneContainer.add(new CardDeckPanel(Card.generateCardArray(1)));
             GamePanel.playerDeckOneContainer.repaint();

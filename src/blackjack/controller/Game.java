@@ -64,12 +64,96 @@ public class Game
             GamePanel.gameStatPanelCurrentChips.setText("Current chips: " + BlackJack.player.getChip());
             GamePanel.gameStatPanel.repaint();
             GamePanel.dealerDeckContainer.removeAll();
+            GamePanel.dealerStatPoint.setText(Card.getValue(BlackJack.dealer.getHandOne().get(0)) + " points");
+            GamePanel.dealerDeckContainer.add(GamePanel.dealerStatContainer);
             GamePanel.dealerDeckContainer.add(new CardDeckPanel(Card.generateCardArray(0)));
             GamePanel.dealerDeckContainer.repaint();
             GamePanel.playerDeckOneContainer.removeAll();
+            GamePanel.playerStatOnePoint.setText(totalValue(1) + " points");
+            GamePanel.playerStatOneDescription.setText("test");
+            GamePanel.playerDeckOneContainer.add(GamePanel.playerStatOneContainer);
             GamePanel.playerDeckOneContainer.add(new CardDeckPanel(Card.generateCardArray(1)));
             GamePanel.playerDeckOneContainer.repaint();
         }
+    }
+    
+    private static int getAce(int whichHand)
+    {
+        //0: dealer's hand
+        //1: player's first hand
+        //2: player's second hand
+        
+    	int numOfAce = 0;
+        if (whichHand == 0)
+        {
+            for (Integer integer : BlackJack.dealer.getHandOne())
+            {
+                if (Card.getValue(integer) == 11)
+                {
+                    numOfAce++;
+                }
+            }
+        }
+        else if (whichHand == 1)
+        {
+            for (Integer integer : BlackJack.player.getHandOne())
+            {
+                if (Card.getValue(integer) == 11)
+                {
+                    numOfAce++;
+                }
+            }
+        }
+        else
+        {
+            for (Integer integer : BlackJack.player.getHandTwo())
+            {
+                if (Card.getValue(integer) == 11)
+                {
+                    numOfAce++;
+                }
+            }
+        }
+    	return numOfAce;
+    }
+    
+    public static int totalValue(int whichHand)
+    {
+        //0: dealer's hand
+        //1: player's first hand
+        //2: player's second hand
+        
+        int totalValue = 0;
+        if (whichHand == 0)
+        {
+            for (Integer integer: BlackJack.dealer.getHandOne())
+            {
+                totalValue += Card.getValue(integer);
+            }
+        }
+        else if (whichHand == 1)
+        {
+            for (Integer integer: BlackJack.player.getHandOne())
+            {
+                totalValue += Card.getValue(integer);
+            }
+        }
+        else
+        {
+            for (Integer integer: BlackJack.player.getHandTwo())
+            {
+                totalValue += Card.getValue(integer);
+            }
+        }
+    	if (getAce(whichHand) > 0)
+    	{
+            totalValue -= (getAce(whichHand)-1) * 10;
+            if (totalValue > 21)
+            {
+                totalValue -= 10;
+            }
+    	}
+    	return totalValue;
     }
         
 }

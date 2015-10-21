@@ -27,6 +27,14 @@ public class GamePanel extends BasePanel
     public static CardDeckPanel dealerDeckPanel;
     public static CardDeckPanel playerDeckOnePanel;
     public static CardDeckPanel playerDeckTwoPanel;
+    public static JPanel dealerStatContainer;
+    public static JLabel dealerStatPoint = new JLabel();
+    public static JPanel playerStatOneContainer;
+    public static JLabel playerStatOnePoint = new JLabel();
+    public static JLabel playerStatOneDescription = new JLabel();
+    public static JPanel playerStatTwoContainer;
+    public static JLabel playerStatTwoPoint = new JLabel();
+    public static JLabel playerStatTwoDescription = new JLabel();
     public static JPanel gameStatPanel;
     public static JLabel gameStatPanelPlayerName;
     public static JLabel gameStatPanelCurrentChips;
@@ -64,8 +72,51 @@ public class GamePanel extends BasePanel
         //The code above is just for reference
         
         dealerDeckContainer = new CardDeckContainer();
+        dealerStatContainer = new JPanel(new BorderLayout());
+        dealerStatContainer.setOpaque(false);
+        JLabel dealerStatTitle = new JLabel("Dealer in Hand");
+        dealerStatTitle.setForeground(Color.WHITE);
+        dealerStatTitle.setHorizontalAlignment(JLabel.CENTER);
+        dealerStatTitle.setFont(new Font("", Font.PLAIN, 12));
+        dealerStatPoint.setForeground(Color.WHITE);
+        dealerStatPoint.setHorizontalAlignment(JLabel.CENTER);
+        dealerStatPoint.setFont(new Font("", Font.PLAIN, 12));
+        dealerStatContainer.add(dealerStatTitle, BorderLayout.NORTH);
+        dealerStatContainer.add(dealerStatPoint, BorderLayout.CENTER);
+        
         playerDeckOneContainer = new CardDeckContainer();
+        playerStatOneContainer = new JPanel(new BorderLayout());
+        playerStatOneContainer.setOpaque(false);
+        JLabel playerStatOneTitle = new JLabel("Player Hand 1");
+        playerStatOneTitle.setForeground(Color.WHITE);
+        playerStatOneTitle.setHorizontalAlignment(JLabel.CENTER);
+        playerStatOneTitle.setFont(new Font("", Font.PLAIN, 12));
+        playerStatOnePoint.setForeground(Color.WHITE);
+        playerStatOnePoint.setHorizontalAlignment(JLabel.CENTER);
+        playerStatOnePoint.setFont(new Font("", Font.PLAIN, 12));
+        playerStatOneDescription.setForeground(Color.WHITE);
+        playerStatOneDescription.setHorizontalAlignment(JLabel.CENTER);
+        playerStatOneDescription.setFont(new Font("", Font.BOLD, 12));
+        playerStatOneContainer.add(playerStatOneTitle, BorderLayout.NORTH);
+        playerStatOneContainer.add(playerStatOnePoint, BorderLayout.CENTER);
+        playerStatOneContainer.add(playerStatOneDescription, BorderLayout.SOUTH);
+        
         playerDeckTwoContainer = new CardDeckContainer(new CardDeckPanel(CARD_BACK));
+        playerStatTwoContainer = new JPanel(new BorderLayout());
+        playerStatTwoContainer.setOpaque(false);
+        JLabel playerStatTwoTitle = new JLabel("Player Hand 2");
+        playerStatTwoTitle.setForeground(Color.WHITE);
+        playerStatTwoTitle.setHorizontalAlignment(JLabel.CENTER);
+        playerStatTwoTitle.setFont(new Font("", Font.PLAIN, 12));
+        playerStatTwoPoint.setForeground(Color.WHITE);
+        playerStatTwoPoint.setHorizontalAlignment(JLabel.CENTER);
+        playerStatTwoPoint.setFont(new Font("", Font.PLAIN, 12));
+        playerStatTwoDescription.setForeground(Color.WHITE);
+        playerStatTwoDescription.setHorizontalAlignment(JLabel.CENTER);
+        playerStatTwoDescription.setFont(new Font("", Font.BOLD, 12));
+        playerStatTwoContainer.add(playerStatTwoTitle, BorderLayout.NORTH);
+        playerStatTwoContainer.add(playerStatTwoPoint, BorderLayout.CENTER);
+        playerStatTwoContainer.add(playerStatTwoDescription, BorderLayout.SOUTH);
         
         gameStatPanel = new JPanel();
         gameStatPanelPlayerName = new JLabel();
@@ -84,12 +135,12 @@ public class GamePanel extends BasePanel
         betButtonPanel = new JPanel();
         playButtonPanel = new JPanel();
         JLabel pleaseBet = new JLabel("Please bet: ");
-        pleaseBet.setFont(new Font("", Font.PLAIN, 16));
+        pleaseBet.setFont(new Font("", Font.PLAIN, 14));
         pleaseBet.setForeground(Color.WHITE);
         betButtonPanel.add(pleaseBet);
         betField = new JTextField();
-        betField.setFont(new Font("", Font.PLAIN, 16));
-        betField.setPreferredSize(new Dimension(80, 32));
+        betField.setFont(new Font("", Font.PLAIN, 14));
+        betField.setPreferredSize(new Dimension(80, 28));
         betButtonPanel.add(betField);
         JButton betButton = new JButton("bet");
         betButtonPanel.add(betButton);
@@ -116,9 +167,6 @@ public class GamePanel extends BasePanel
         add(playerDeckTwoContainer);
         add(playerDeckOneContainer);
         add(gameButtonPanel);
-        
-        System.out.println(dealerDeckContainer);
-        System.out.println(playerDeckOneContainer);
         
         this.addComponentListener(new ComponentAdapter()
         {

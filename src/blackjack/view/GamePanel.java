@@ -20,22 +20,20 @@ import blackjack.controller.*;
  */
 public class GamePanel extends BasePanel
 {
-    private ArrayList<String> dealerInHand;
-    private ArrayList<String> playerInHandOne;
-    private ArrayList<String> playerInHandTwo;
-    private ArrayList<CardPanel> dealerCards;
-    private ArrayList<CardPanel> playerCardsOne;
-    private ArrayList<CardPanel> playerCardsTwo;
     private static final ArrayList<CardPanel> CARD_BACK = new ArrayList<CardPanel>();
-    private CardDeckContainer dealerDeckPanel;
-    private CardDeckContainer playerDeckOnePanel;
-    private CardDeckContainer playerDeckTwoPanel;
+    public static CardDeckContainer dealerDeckContainer;
+    public static CardDeckContainer playerDeckOneContainer;
+    public static CardDeckContainer playerDeckTwoContainer;
+    public static CardDeckPanel dealerDeckPanel;
+    public static CardDeckPanel playerDeckOnePanel;
+    public static CardDeckPanel playerDeckTwoPanel;
     public static JPanel gameStatPanel;
     public static JLabel gameStatPanelPlayerName;
     public static JLabel gameStatPanelCurrentChips;
     public static JPanel gameButtonPanel;
     public static final CardLayout cardLayout = new CardLayout();
     private JPanel betButtonPanel;
+    public static JTextField betField;
     private JPanel playButtonPanel;
     
     public GamePanel()
@@ -65,9 +63,9 @@ public class GamePanel extends BasePanel
 //        }
         //The code above is just for reference
         
-        dealerDeckPanel = new CardDeckContainer(new CardDeckPanel(CARD_BACK));
-        playerDeckOnePanel = new CardDeckContainer(new CardDeckPanel(CARD_BACK));
-        playerDeckTwoPanel = new CardDeckContainer(new CardDeckPanel(CARD_BACK));
+        dealerDeckContainer = new CardDeckContainer();
+        playerDeckOneContainer = new CardDeckContainer();
+        playerDeckTwoContainer = new CardDeckContainer(new CardDeckPanel(CARD_BACK));
         
         gameStatPanel = new JPanel();
         gameStatPanelPlayerName = new JLabel();
@@ -89,7 +87,7 @@ public class GamePanel extends BasePanel
         pleaseBet.setFont(new Font("", Font.PLAIN, 16));
         pleaseBet.setForeground(Color.WHITE);
         betButtonPanel.add(pleaseBet);
-        JTextField betField = new JTextField();
+        betField = new JTextField();
         betField.setFont(new Font("", Font.PLAIN, 16));
         betField.setPreferredSize(new Dimension(80, 32));
         betButtonPanel.add(betField);
@@ -114,17 +112,42 @@ public class GamePanel extends BasePanel
         gameButtonPanel.setOpaque(false);
         
         add(gameStatPanel);
-        add(dealerDeckPanel);
-        add(playerDeckTwoPanel);
-        add(playerDeckOnePanel);
+        add(dealerDeckContainer);
+        add(playerDeckTwoContainer);
+        add(playerDeckOneContainer);
         add(gameButtonPanel);
+        
+        System.out.println(dealerDeckContainer);
+        System.out.println(playerDeckOneContainer);
         
         this.addComponentListener(new ComponentAdapter()
         {
             @Override
             public void componentShown(ComponentEvent e)
             {
-                Game.initRound();
+                Game.initGame();
+            }
+        });
+        
+        betField.addKeyListener(new KeyAdapter()
+        {
+            @Override
+            public void keyTyped(KeyEvent e)
+            {
+                int keyChar = e.getKeyChar();
+                if (keyChar < KeyEvent.VK_0 || keyChar > KeyEvent.VK_9)
+                {
+                    e.consume();
+                }
+            }
+        });
+        
+        betButton.addActionListener(new ActionListener()
+        {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                Game.bet(Integer.parseInt(betField.getText()));
             }
         });
     }

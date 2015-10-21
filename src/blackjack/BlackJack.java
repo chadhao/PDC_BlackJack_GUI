@@ -16,6 +16,7 @@ import java.sql.*;
  * @author Chad
  */
 public class BlackJack {
+    public static BlackjackFrame gameFrame;
     private static final String IMG_SRC = "img/bg.png";
     public static Player player;
     public static Player dealer;
@@ -25,14 +26,13 @@ public class BlackJack {
     public static void main(String[] args) {
         player = new Player(true);
         dealer = new Player(false);
-        System.out.println(BlackJack.player);
         
         EventQueue.invokeLater(new Runnable()
         {
             @Override
             public void run()
             {
-                BlackjackFrame gameFrame = new BlackjackFrame();
+                gameFrame = new BlackjackFrame();
                 WelcomePanel welcomePanel = new WelcomePanel(IMG_SRC);
                 NewGamePanel newGamePanel = new NewGamePanel(IMG_SRC);
                 LoadGamePanel loadGamePanel = new LoadGamePanel(IMG_SRC);

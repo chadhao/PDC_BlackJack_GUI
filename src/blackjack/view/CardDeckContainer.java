@@ -23,6 +23,13 @@ public class CardDeckContainer extends JComponent
         add(contentPanel);
     }
 
+    public CardDeckContainer()
+    {
+        setBorder(new EmptyBorder(10, 0, 10, 0));
+        setLayout(new FlowLayout());
+        setOpaque(false);
+    }
+
     @Override
     public Dimension getPreferredSize()
     {

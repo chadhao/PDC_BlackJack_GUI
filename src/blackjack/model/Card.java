@@ -5,6 +5,9 @@
  */
 package blackjack.model;
 
+import blackjack.view.*;
+import blackjack.controller.*;
+import blackjack.*;
 import java.util.*;
 
 /**
@@ -86,5 +89,44 @@ public class Card {
     public static int getCardNow()
     {
         return cardNow;
+    }
+    
+    public static ArrayList<CardPanel> generateCardArray(int whichHand)
+    {
+        //0: dealer's hand
+        //1: player's first hand
+        //2: player's second hand
+        
+        ArrayList<CardPanel> cardsInHand = new ArrayList<>();
+        if (whichHand == 0)
+        {
+            if (Game.isDealersTurn)
+            {
+                for (int i = 0; i < BlackJack.dealer.getHandOne().size(); i++)
+                {
+                    cardsInHand.add(new CardPanel("img/cards/" + getCard(BlackJack.dealer.getHandOne().get(i)) + ".png"));
+                }
+            }
+            else
+            {
+                cardsInHand.add(new CardPanel("img/cards/" + getCard(BlackJack.dealer.getHandOne().get(0)) + ".png"));
+                cardsInHand.add(new CardPanel("img/cards/BACK.png"));
+            }
+        }
+        else if (whichHand == 1)
+        {
+            for (int i = 0; i < BlackJack.player.getHandOne().size(); i++)
+            {
+                cardsInHand.add(new CardPanel("img/cards/" + getCard(BlackJack.player.getHandOne().get(i)) + ".png"));
+            }
+        }
+        else
+        {
+            for (int i = 0; i < BlackJack.player.getHandTwo().size(); i++)
+            {
+                cardsInHand.add(new CardPanel("img/cards/" + getCard(BlackJack.player.getHandTwo().get(i)) + ".png"));
+            }
+        }
+        return cardsInHand;
     }
 }

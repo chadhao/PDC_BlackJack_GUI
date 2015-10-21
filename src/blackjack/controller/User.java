@@ -172,9 +172,18 @@ public class User
         return true;
     }
     
-    public void deleteUserByName(String username)
+    public static boolean deleteUserByName(String username)
     {
-        
+        String SQLCommand = "DELETE FROM USERS WHERE USERNAME = \'" + username + "\'";
+        try
+        {
+            DBOps.exeUpdate(SQLCommand);
+        }
+        catch (SQLException sqle)
+        {
+            return false;
+        }
+        return true;
     }
     
     public void updateUser(User aUser)

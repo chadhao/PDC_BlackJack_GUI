@@ -148,15 +148,12 @@ public class GamePanel extends BasePanel
         JButton hitButton = new JButton("Hit");
         JButton standButton = new JButton("Stand");
         JButton doubleButton = new JButton("Double");
-        JButton insureButton = new JButton("Insure");
-        insureButton.setEnabled(false);
-        JButton splitButton = new JButton("Split");
-        splitButton.setEnabled(false);
+        //JButton splitButton = new JButton("Split");
+        //splitButton.setEnabled(false);
         playButtonPanel.add(hitButton);
         playButtonPanel.add(standButton);
         playButtonPanel.add(doubleButton);
-        playButtonPanel.add(insureButton);
-        playButtonPanel.add(splitButton);
+        //playButtonPanel.add(splitButton);
         playButtonPanel.setOpaque(false);
         gameButtonPanel.add("betbutton", betButtonPanel);
         gameButtonPanel.add("playbutton", playButtonPanel);
@@ -174,6 +171,32 @@ public class GamePanel extends BasePanel
             public void componentShown(ComponentEvent e)
             {
                 Game.initGame();
+            }
+        });
+        
+        betButtonPanel.addComponentListener(new ComponentAdapter()
+        {
+            @Override
+            public void componentShown(ComponentEvent e)
+            {
+                if (BlackJack.player.getChip() <= 0)
+                {
+                    JOptionPane.showMessageDialog(null, "You are penniless!", "Information", JOptionPane.INFORMATION_MESSAGE);
+                    User.deleteUserByName(BlackJack.player.getName());
+                    BlackJack.player = new Player(true);
+                    BlackJack.dealer = new Player(false);
+                    BlackjackFrame.cardLayout.show(BlackJack.gameFrame, "newgame");
+                }
+                BlackJack.player.setBet(0);
+                BlackJack.player.setDoubled(false);
+                BlackJack.player.setInsured(false);
+                BlackJack.player.setSplit(false);
+                BlackJack.player.getHandOne().clear();
+                BlackJack.player.getHandTwo().clear();
+                BlackJack.dealer.getHandOne().clear();
+                GamePanel.gameStatPanelPlayerName.setText("Player: " + BlackJack.player.getName());
+                GamePanel.gameStatPanelCurrentChips.setText("Current chips: " + BlackJack.player.getChip());
+                GamePanel.gameStatPanel.repaint();
             }
         });
         

@@ -22,28 +22,14 @@ public class Game
     {
         Card.shuffleCards();
         GamePanel.cardLayout.show(GamePanel.gameButtonPanel, "betbutton");
-        BlackJack.player.setBet(0);
-        BlackJack.player.setDoubled(false);
-        BlackJack.player.setInsured(false);
-        BlackJack.player.setSplit(false);
-        BlackJack.player.getHandOne().clear();
-        BlackJack.player.getHandTwo().clear();
-        BlackJack.dealer.getHandOne().clear();
         GamePanel.gameStatPanelPlayerName.setText("Player: " + BlackJack.player.getName());
         GamePanel.gameStatPanelCurrentChips.setText("Current chips: " + BlackJack.player.getChip());
         GamePanel.gameStatPanel.repaint();
-        if (BlackJack.player.getChip() <= 0)
-        {
-            JOptionPane.showMessageDialog(null, "You are penniless!", "Information", JOptionPane.INFORMATION_MESSAGE);
-            User.deleteUserByName(BlackJack.player.getName());
-            BlackJack.player = new Player(true);
-            BlackJack.dealer = new Player(false);
-            BlackjackFrame.cardLayout.show(BlackJack.gameFrame, "newgame");
-        }
     }
     
     public static void bet(int bet)
     {
+        isDealersTurn = false;
         if (bet > BlackJack.player.getChip())
         {
             JOptionPane.showMessageDialog(null, "You do not have enough chips to bet!", "Information", JOptionPane.INFORMATION_MESSAGE);
@@ -75,6 +61,8 @@ public class Game
             GamePanel.playerDeckOneContainer.add(new CardDeckPanel(Card.generateCardArray(1)));
             GamePanel.playerDeckOneContainer.repaint();
         }
+        checkBlackjack(1);
+        checkInsure();
     }
     
     private static int getAce(int whichHand)
@@ -155,5 +143,85 @@ public class Game
     	}
     	return totalValue;
     }
+    
+    public static void checkBlackjack(int whichHand)
+    {
+        //1: player hand 1
+        //2: player hand 2
         
+        if (totalValue(1) == 21 && totalValue(0) != 21)
+        {
+            isDealersTurn = true;
+            GamePanel.dealerDeckContainer.removeAll();
+            GamePanel.dealerStatPoint.setText(totalValue(0) + " points");
+            GamePanel.dealerDeckContainer.add(GamePanel.dealerStatContainer);
+            GamePanel.dealerDeckContainer.add(new CardDeckPanel(Card.generateCardArray(0)));
+            GamePanel.dealerDeckContainer.repaint();
+            BlackJack.player.addWin();
+            BlackJack.player.setChip((int)(BlackJack.player.getChip() + BlackJack.player.getBet(whichHand)*2.5));
+            JOptionPane.showMessageDialog(null, "You hold Blackjack in hand " + whichHand + "!", "Information", JOptionPane.INFORMATION_MESSAGE);
+            GamePanel.cardLayout.show(GamePanel.gameButtonPanel, "betbutton");
+        }
+        else if (totalValue(1) == 21 && totalValue(0) == 21)
+        {
+            isDealersTurn = true;
+            GamePanel.dealerDeckContainer.removeAll();
+            GamePanel.dealerStatPoint.setText(totalValue(0) + " points");
+            GamePanel.dealerDeckContainer.add(GamePanel.dealerStatContainer);
+            GamePanel.dealerDeckContainer.add(new CardDeckPanel(Card.generateCardArray(0)));
+            GamePanel.dealerDeckContainer.repaint();
+            BlackJack.player.addPush();
+            BlackJack.player.setChip(BlackJack.player.getChip() + BlackJack.player.getBet(1));
+            JOptionPane.showMessageDialog(null, "You and dealer both hold Blackjack!", "Information", JOptionPane.INFORMATION_MESSAGE);
+            GamePanel.cardLayout.show(GamePanel.gameButtonPanel, "betbutton");
+        }
+    }
+    
+    public static void checkInsure()
+    {
+        if (Card.getValue(BlackJack.dealer.getHandOne().get(0)) == 11)
+        {
+            int choice = JOptionPane.showConfirmDialog(null, "Dealer shows an Ace.\nDo you want to insure this hand?", "Insure", JOptionPane.YES_NO_OPTION);
+            if (choice == JOptionPane.YES_OPTION)
+            {
+                BlackJack.player.setChip(BlackJack.player.getChip() - BlackJack.player.getBet(1)/2);
+                if (totalValue(0) == 21)
+                {
+                    isDealersTurn = true;
+                    GamePanel.dealerDeckContainer.removeAll();
+                    GamePanel.dealerStatPoint.setText(totalValue(0) + " points");
+                    GamePanel.dealerDeckContainer.add(GamePanel.dealerStatContainer);
+                    GamePanel.dealerDeckContainer.add(new CardDeckPanel(Card.generateCardArray(0)));
+                    GamePanel.dealerDeckContainer.repaint();
+                    BlackJack.player.setChip(BlackJack.player.getChip() + BlackJack.player.getBet(1));
+                    BlackJack.player.addLose();
+                    JOptionPane.showMessageDialog(null, "Dealer holds Blackjack!", "Information", JOptionPane.INFORMATION_MESSAGE);
+                    GamePanel.cardLayout.show(GamePanel.gameButtonPanel, "betbutton");
+                }
+                else
+                {
+                    JOptionPane.showMessageDialog(null, "Dealer does not hold Blackjack!", "Information", JOptionPane.INFORMATION_MESSAGE);
+                }
+            }
+            else
+            {
+                if (totalValue(0) == 21)
+                {
+                    isDealersTurn = true;
+                    GamePanel.dealerDeckContainer.removeAll();
+                    GamePanel.dealerStatPoint.setText(totalValue(0) + " points");
+                    GamePanel.dealerDeckContainer.add(GamePanel.dealerStatContainer);
+                    GamePanel.dealerDeckContainer.add(new CardDeckPanel(Card.generateCardArray(0)));
+                    GamePanel.dealerDeckContainer.repaint();
+                    BlackJack.player.addLose();
+                    JOptionPane.showMessageDialog(null, "Dealer holds Blackjack!", "Information", JOptionPane.INFORMATION_MESSAGE);
+                    GamePanel.cardLayout.show(GamePanel.gameButtonPanel, "betbutton");
+                }
+                else
+                {
+                    JOptionPane.showMessageDialog(null, "Dealer does not hold Blackjack!", "Information", JOptionPane.INFORMATION_MESSAGE);
+                }
+            }
+        }
+    }
 }

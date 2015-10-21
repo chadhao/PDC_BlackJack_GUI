@@ -34,10 +34,6 @@ public class LoadGamePanel extends BasePanel
         playButton = new JButton("Play");
         backButton = new JButton("Back");
         
-        if (savedData.length != 0)
-        {
-            savedList.setSelectedIndex(0);
-        }
         savedList.setVisibleRowCount(5);
         savedList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         savedList.setFixedCellHeight(22);
@@ -77,9 +73,16 @@ public class LoadGamePanel extends BasePanel
             @Override
             public void actionPerformed(ActionEvent e)
             {
-                String selectedUsername = savedList.getSelectedValue().split("\\[")[1].split("\\]")[0];
-                User.initPlayer(selectedUsername);
-                BlackjackFrame.cardLayout.show(getParent(), "game");
+                if (savedList.getSelectedValue() != null)
+                {
+                    String selectedUsername = savedList.getSelectedValue().split("\\[")[1].split("\\]")[0];
+                    User.initPlayer(selectedUsername);
+                    BlackjackFrame.cardLayout.show(getParent(), "game");
+                }
+                else
+                {
+                    JOptionPane.showMessageDialog(null, "Please select a record from list!", "Information", JOptionPane.INFORMATION_MESSAGE);
+                }
             }
         });
         

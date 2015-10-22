@@ -38,6 +38,7 @@ public class GamePanel extends BasePanel
     public static JPanel gameStatPanel;
     public static JLabel gameStatPanelPlayerName;
     public static JLabel gameStatPanelCurrentChips;
+    public static JLabel gameStatPanelCurrentBet;
     public static JPanel gameButtonPanel;
     public static final CardLayout cardLayout = new CardLayout();
     private JPanel betButtonPanel;
@@ -124,14 +125,19 @@ public class GamePanel extends BasePanel
         gameStatPanel = new JPanel();
         gameStatPanelPlayerName = new JLabel();
         gameStatPanelCurrentChips = new JLabel();
+        gameStatPanelCurrentBet = new JLabel();
         gameStatPanelPlayerName.setFont(new Font("", Font.PLAIN, 14));
         gameStatPanelPlayerName.setForeground(Color.WHITE);
-        gameStatPanelPlayerName.setBorder(new EmptyBorder(0, 0, 0, 10));
+        gameStatPanelPlayerName.setBorder(new EmptyBorder(0, 0, 0, 5));
         gameStatPanelCurrentChips.setFont(new Font("", Font.PLAIN, 14));
         gameStatPanelCurrentChips.setForeground(Color.WHITE);
-        gameStatPanelCurrentChips.setBorder(new EmptyBorder(0, 10, 0, 0));
+        gameStatPanelCurrentChips.setBorder(new EmptyBorder(0, 5, 0, 5));
+        gameStatPanelCurrentBet.setFont(new Font("", Font.PLAIN, 14));
+        gameStatPanelCurrentBet.setForeground(Color.WHITE);
+        gameStatPanelCurrentBet.setBorder(new EmptyBorder(0, 5, 0, 0));
         gameStatPanel.add(gameStatPanelPlayerName);
         gameStatPanel.add(gameStatPanelCurrentChips);
+        gameStatPanel.add(gameStatPanelCurrentBet);
         gameStatPanel.setOpaque(false);
         
         gameButtonPanel = new JPanel(cardLayout);
@@ -201,7 +207,8 @@ public class GamePanel extends BasePanel
                 BlackJack.player.getHandTwo().clear();
                 BlackJack.dealer.getHandOne().clear();
                 GamePanel.gameStatPanelPlayerName.setText("Player: " + BlackJack.player.getName());
-                GamePanel.gameStatPanelCurrentChips.setText("Current chips: " + BlackJack.player.getChip());
+                GamePanel.gameStatPanelCurrentChips.setText("Chips: " + BlackJack.player.getChip());
+                GamePanel.gameStatPanelCurrentBet.setText("Bet: 0");
                 GamePanel.gameStatPanel.repaint();
             }
         });
@@ -233,6 +240,7 @@ public class GamePanel extends BasePanel
             @Override
             public void actionPerformed(ActionEvent e)
             {
+                doubleButton.setEnabled(false);
                 Game.hit();
             }
         });
@@ -250,6 +258,19 @@ public class GamePanel extends BasePanel
                 Game.dealerGame();
             }
         });
+        
+        doubleButton.addActionListener(new ActionListener()
+        {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                hitButton.setEnabled(false);
+                standButton.setEnabled(false);
+                doubleButton.setEnabled(false);
+                Game.doubleDown();
+            }
+        });
+        
     }
     
 }

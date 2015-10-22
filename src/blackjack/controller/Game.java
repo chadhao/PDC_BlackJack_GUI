@@ -23,8 +23,13 @@ public class Game
         Card.shuffleCards();
         GamePanel.cardLayout.show(GamePanel.gameButtonPanel, "betbutton");
         GamePanel.gameStatPanelPlayerName.setText("Player: " + BlackJack.player.getName());
-        GamePanel.gameStatPanelCurrentChips.setText("Current chips: " + BlackJack.player.getChip());
+        GamePanel.gameStatPanelCurrentChips.setText("Chips: " + BlackJack.player.getChip());
+        GamePanel.gameStatPanelCurrentBet.setText("Bet: 0");
         GamePanel.gameStatPanel.repaint();
+        GamePanel.dealerDeckContainer.removeAll();
+        GamePanel.dealerDeckContainer.repaint();
+        GamePanel.playerDeckOneContainer.removeAll();
+        GamePanel.playerDeckOneContainer.repaint();
     }
     
     public static void bet(int bet)
@@ -47,7 +52,8 @@ public class Game
             BlackJack.player.getHandOne().add(Card.dealCard());
             BlackJack.dealer.getHandOne().add(Card.dealCard());
             BlackJack.player.getHandOne().add(Card.dealCard());
-            GamePanel.gameStatPanelCurrentChips.setText("Current chips: " + BlackJack.player.getChip());
+            GamePanel.gameStatPanelCurrentChips.setText("Chips: " + BlackJack.player.getChip());
+            GamePanel.gameStatPanelCurrentBet.setText("Bet: " + BlackJack.player.getBet(0));
             GamePanel.gameStatPanel.repaint();
             GamePanel.dealerDeckContainer.removeAll();
             GamePanel.dealerStatPoint.setText(Card.getValue(BlackJack.dealer.getHandOne().get(0)) + " points");
@@ -61,8 +67,10 @@ public class Game
             GamePanel.playerDeckOneContainer.add(new CardDeckPanel(Card.generateCardArray(1)));
             GamePanel.playerDeckOneContainer.repaint();
         }
-        checkBlackjack(1);
-        checkInsure();
+        if (!checkBlackjack(1))
+        {
+            checkInsure();
+        }
     }
     
     private static int getAce(int whichHand)
@@ -144,7 +152,7 @@ public class Game
     	return totalValue;
     }
     
-    public static void checkBlackjack(int whichHand)
+    public static boolean checkBlackjack(int whichHand)
     {
         //1: player hand 1
         //2: player hand 2
@@ -161,6 +169,7 @@ public class Game
             BlackJack.player.setChip((int)(BlackJack.player.getChip() + BlackJack.player.getBet(whichHand-1)*2.5));
             JOptionPane.showMessageDialog(null, "You hold Blackjack!", "Information", JOptionPane.INFORMATION_MESSAGE);
             GamePanel.cardLayout.show(GamePanel.gameButtonPanel, "betbutton");
+            return true;
         }
         else if (totalValue(1) == 21 && totalValue(0) == 21)
         {
@@ -174,7 +183,9 @@ public class Game
             BlackJack.player.setChip(BlackJack.player.getChip() + BlackJack.player.getBet(whichHand-1));
             JOptionPane.showMessageDialog(null, "You and dealer both hold Blackjack!", "Information", JOptionPane.INFORMATION_MESSAGE);
             GamePanel.cardLayout.show(GamePanel.gameButtonPanel, "betbutton");
+            return true;
         }
+        return false;
     }
     
     public static void checkInsure()
@@ -199,6 +210,7 @@ public class Game
                     GamePanel.dealerDeckContainer.add(GamePanel.dealerStatContainer);
                     GamePanel.dealerDeckContainer.add(new CardDeckPanel(Card.generateCardArray(0)));
                     GamePanel.dealerDeckContainer.repaint();
+                    GamePanel.dealerDeckContainer.revalidate();
                     BlackJack.player.setChip(BlackJack.player.getChip() + BlackJack.player.getBet(0));
                     BlackJack.player.addLose();
                     JOptionPane.showMessageDialog(null, "Dealer holds Blackjack!", "Information", JOptionPane.INFORMATION_MESSAGE);
@@ -219,6 +231,7 @@ public class Game
                     GamePanel.dealerDeckContainer.add(GamePanel.dealerStatContainer);
                     GamePanel.dealerDeckContainer.add(new CardDeckPanel(Card.generateCardArray(0)));
                     GamePanel.dealerDeckContainer.repaint();
+                    GamePanel.dealerDeckContainer.revalidate();
                     BlackJack.player.addLose();
                     JOptionPane.showMessageDialog(null, "Dealer holds Blackjack!", "Information", JOptionPane.INFORMATION_MESSAGE);
                     GamePanel.cardLayout.show(GamePanel.gameButtonPanel, "betbutton");
@@ -272,7 +285,7 @@ public class Game
     
     public static void dealerGame()
     {
-        JOptionPane.showMessageDialog(null, "You stand!\nIt is dealer\'s turn now.", "Information", JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(null, "It is dealer\'s turn now.", "Information", JOptionPane.INFORMATION_MESSAGE);
         isDealersTurn = true;
         while (totalValue(0) < 17)
         {
@@ -282,7 +295,7 @@ public class Game
             GamePanel.dealerDeckContainer.add(new CardDeckPanel(Card.generateCardArray(0)));
             GamePanel.dealerDeckContainer.repaint();
             GamePanel.dealerDeckContainer.revalidate();
-            try{Thread.sleep(500);}catch(Exception e){}
+            try{Thread.sleep(1000);}catch(Exception e){}
             BlackJack.dealer.getHandOne().add(Card.dealCard());
         }
         GamePanel.dealerDeckContainer.removeAll();
@@ -323,6 +336,27 @@ public class Game
     
     public static void doubleDown()
     {
-        
+        if (BlackJack.player.getChip() < BlackJack.player.getBet(0))
+        {
+            JOptionPane.showMessageDialog(null, "You do not have enough chips to double down this hand!", "Information", JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }
+        BlackJack.player.setChip(BlackJack.player.getChip() - BlackJack.player.getBet(0));
+        BlackJack.player.setBet(0, BlackJack.player.getBet(0)*2);
+        BlackJack.player.getHandOne().add(Card.dealCard());
+        GamePanel.gameStatPanelCurrentChips.setText("Chips: " + BlackJack.player.getChip());
+        GamePanel.gameStatPanelCurrentBet.setText("Bet: " + BlackJack.player.getBet(0));
+        GamePanel.gameStatPanel.repaint();
+        GamePanel.playerDeckOneContainer.removeAll();
+        GamePanel.playerStatOnePoint.setText(totalValue(1) + " points");
+        GamePanel.playerStatOneDescription.setText("Double Down");
+        GamePanel.playerDeckOneContainer.add(GamePanel.playerStatOneContainer);
+        GamePanel.playerDeckOneContainer.add(new CardDeckPanel(Card.generateCardArray(1)));
+        GamePanel.playerDeckOneContainer.repaint();
+        GamePanel.playerDeckOneContainer.revalidate();
+        if (!checkBusted(1))
+        {
+            dealerGame();
+        }
     }
 }

@@ -151,9 +151,12 @@ public class GamePanel extends BasePanel
         betField.setFont(new Font("", Font.PLAIN, 14));
         betField.setPreferredSize(new Dimension(80, 28));
         betButtonPanel.add(betField);
-        JButton betButton = new JButton("bet");
+        JButton betButton = new JButton("Bet");
+        JButton backButton = new JButton("Back");
         betButtonPanel.add(betButton);
+        betButtonPanel.add(backButton);
         betButtonPanel.setOpaque(false);
+        
         hitButton = new JButton("Hit");
         standButton = new JButton("Stand");
         doubleButton = new JButton("Double");
@@ -200,9 +203,6 @@ public class GamePanel extends BasePanel
                 standButton.setEnabled(true);
                 doubleButton.setEnabled(true);
                 BlackJack.player.setBet(0);
-                BlackJack.player.setDoubled(false);
-                BlackJack.player.setInsured(false);
-                BlackJack.player.setSplit(false);
                 BlackJack.player.getHandOne().clear();
                 BlackJack.player.getHandTwo().clear();
                 BlackJack.dealer.getHandOne().clear();
@@ -232,6 +232,22 @@ public class GamePanel extends BasePanel
             public void actionPerformed(ActionEvent e)
             {
                 Game.bet(Integer.parseInt(betField.getText()));
+            }
+        });
+        
+        backButton.addActionListener(new ActionListener()
+        {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                int choice = JOptionPane.showConfirmDialog(null, "Do you want to go back to main menu?\nYour record will be saved.", "Go Back", JOptionPane.YES_NO_OPTION);
+                if (choice == JOptionPane.YES_OPTION)
+                {
+                    User.updateUser();
+                    BlackJack.player = new Player(true);
+                    BlackJack.dealer = new Player(false);
+                    BlackjackFrame.cardLayout.show(getParent(), "welcome");
+                }
             }
         });
         
@@ -267,7 +283,12 @@ public class GamePanel extends BasePanel
                 hitButton.setEnabled(false);
                 standButton.setEnabled(false);
                 doubleButton.setEnabled(false);
-                Game.doubleDown();
+                if (!Game.doubleDown())
+                {
+                    hitButton.setEnabled(true);
+                    standButton.setEnabled(true);
+                    doubleButton.setEnabled(false);
+                }
             }
         });
         

@@ -182,9 +182,26 @@ public class User
         return true;
     }
     
-    public void updateUser(User aUser)
+    public static void updateUser()
     {
-        
+        String name = BlackJack.player.getName();
+        int chips = BlackJack.player.getChip();
+        int win = BlackJack.player.getWin();
+        int lose = BlackJack.player.getLose();
+        int push = BlackJack.player.getPush();
+        if (chips == 0)
+        {
+            deleteUserByName(name);
+            return;
+        }
+        String SQLCommand = "UPDATE USERS SET CHIPS = " + chips + ", WIN = " + win + ", LOSE = " + lose + ", PUSH = " + push + "WHERE USERNAME = \'" + name + "\'";
+        try
+        {
+            DBOps.exeUpdate(SQLCommand);
+        }
+        catch (SQLException sqle)
+        {
+        }
     }
     
     public int getID()

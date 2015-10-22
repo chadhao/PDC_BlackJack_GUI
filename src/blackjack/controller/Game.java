@@ -45,6 +45,7 @@ public class Game
             BlackJack.player.setChip(BlackJack.player.getChip()-bet);
             if (Card.getCardNow() > (52*Card.NUM_OF_SET*3/4))
             {
+                JOptionPane.showMessageDialog(null, "Shuffling cards...", "Information", JOptionPane.INFORMATION_MESSAGE);
     		Card.shuffleCards();
             }
             GamePanel.cardLayout.show(GamePanel.gameButtonPanel, "playbutton");
@@ -334,12 +335,12 @@ public class Game
         }
     }
     
-    public static void doubleDown()
+    public static boolean doubleDown()
     {
         if (BlackJack.player.getChip() < BlackJack.player.getBet(0))
         {
             JOptionPane.showMessageDialog(null, "You do not have enough chips to double down this hand!", "Information", JOptionPane.INFORMATION_MESSAGE);
-            return;
+            return false;
         }
         BlackJack.player.setChip(BlackJack.player.getChip() - BlackJack.player.getBet(0));
         BlackJack.player.setBet(0, BlackJack.player.getBet(0)*2);
@@ -358,5 +359,6 @@ public class Game
         {
             dealerGame();
         }
+        return true;
     }
 }

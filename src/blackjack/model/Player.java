@@ -20,9 +20,6 @@ public class Player
     private int[] bet;
     private ArrayList<Integer> handOne;
     private ArrayList<Integer> handTwo;
-    private boolean isInsured;
-    private boolean[] isDoubled;
-    private boolean isSplit;
     
     public Player(boolean isPlayer)
     {
@@ -34,11 +31,6 @@ public class Player
         this.bet = new int[2];
         this.bet[0] = isPlayer?0:-1;
         this.bet[1] = isPlayer?0:-1;
-        this.isInsured = false;
-        this.isDoubled = new boolean[2];
-        this.isDoubled[0] = false;
-        this.isDoubled[1] = false;
-        this.isSplit = false;
         this.handOne = new ArrayList<>();
         this.handTwo = isPlayer?new ArrayList<>():null;
     }
@@ -64,21 +56,6 @@ public class Player
         return this.handTwo;
     }
     
-    public boolean isDoubled(int whichHand)
-    {
-	return this.isDoubled[whichHand];
-    }
-    
-    public boolean isInsured()
-    {
-	return this.isInsured;
-    }
-    
-    public boolean isSplit()
-    {
-	return this.isSplit;
-    }
-    
     public int getChip()
     {
 	return this.chip;
@@ -87,27 +64,6 @@ public class Player
     public void setChip(int chip)
     {
 	this.chip = chip;
-    }
-    
-    public void setDoubled(boolean isDoubled)
-    {
-	this.isDoubled[0] = isDoubled;
-	this.isDoubled[1] = isDoubled;
-    }
-    
-    public void setDoubled(int whichHand, boolean isDoubled)
-    {
-    	this.isDoubled[whichHand] = isDoubled;
-    }
-    
-    public void setInsured(boolean isInsured)
-    {
-	this.isInsured = isInsured;
-    }
-    
-    public void setSplit(boolean isSplit)
-    {
-	this.isSplit = isSplit;
     }
     
     public void addWin()
@@ -130,14 +86,29 @@ public class Player
         this.name = name;
     }
     
+    public int getWin()
+    {
+        return this.win;
+    }
+    
     public void setWin(int win)
     {
         this.win = win;
     }
     
+    public int getLose()
+    {
+        return this.lose;
+    }
+    
     public void setLose(int lose)
     {
         this.lose = lose;
+    }
+    
+    public int getPush()
+    {
+        return this.push;
     }
     
     public void setPush(int push)

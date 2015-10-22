@@ -6,7 +6,11 @@
 package blackjack.view;
 
 import java.awt.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import javax.swing.*;
+import blackjack.*;
+import blackjack.controller.*;
 
 /**
  *
@@ -25,6 +29,20 @@ public class BlackjackFrame extends JFrame
         setLayout(cardLayout);
         setTitle("Blackjack");
         setResizable(false);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        
+        this.addWindowListener(new WindowAdapter()
+        {
+            @Override
+            public void windowClosing(WindowEvent e)
+            {
+                super.windowClosing(e);
+                if (BlackJack.player.getChip() != 0)
+                {
+                    User.updateUser();
+                    JOptionPane.showMessageDialog(null, "Exiting game!\nYour record will be saved!", "Information", JOptionPane.INFORMATION_MESSAGE);
+                }
+                System.exit(0);
+            }
+        });
     }
 }

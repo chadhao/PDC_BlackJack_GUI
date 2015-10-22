@@ -4,7 +4,10 @@ package blackjack.controller;
 import blackjack.*;
 import blackjack.model.*;
 import blackjack.view.*;
-import javax.swing.JOptionPane;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
+import javax.swing.*;
 
 /**
  * The Class Game.
@@ -319,14 +322,24 @@ public class Game
         isDealersTurn = true;
         while (totalValue(0) < 17)
         {
+            //try{Thread.sleep(1000);}catch(Exception e){}
             GamePanel.dealerDeckContainer.removeAll();
             GamePanel.dealerStatPoint.setText(totalValue(0) + " points");
             GamePanel.dealerDeckContainer.add(GamePanel.dealerStatContainer);
             GamePanel.dealerDeckContainer.add(new CardDeckPanel(Card.generateCardArray(0)));
             GamePanel.dealerDeckContainer.repaint();
             GamePanel.dealerDeckContainer.revalidate();
-            try{Thread.sleep(1000);}catch(Exception e){}
             BlackJack.dealer.getHandOne().add(Card.dealCard());
+//            ScheduledExecutorService exec = Executors.newScheduledThreadPool(1);
+//            exec.schedule(new Runnable()
+//            {
+//                @Override
+//                public void run()
+//                {
+//                    BlackJack.dealer.getHandOne().add(Card.dealCard());
+//                }
+//            }, 500, TimeUnit.MILLISECONDS);
+//            exec.shutdown();
         }
         GamePanel.dealerDeckContainer.removeAll();
         GamePanel.dealerStatPoint.setText(totalValue(0) + " points");

@@ -1,6 +1,6 @@
 ----------------------------------------------------------------
-Thu Oct 22 17:36:29 NZDT 2015:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.11.1.2 - (1629631): instance a816c00e-0150-8dd5-773a-000006ba74c0 
+Fri Oct 23 03:05:59 NZDT 2015:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.11.1.2 - (1629631): instance a816c00e-0150-8fde-dcb0-000006ba18c0 
 on database directory /Users/Chad/Documents/workspace/java/PDC/PDC_BlackJack_GUI/BLACKJACK with class loader sun.misc.Launcher$AppClassLoader@4e25154f 
 Loaded from file:/Users/Chad/Documents/workspace/java/PDC/PDC_BlackJack_GUI/lib/derby.jar
 java.vendor=Oracle Corporation
@@ -8,6 +8,6 @@ java.runtime.version=1.8.0_25-b17
 user.dir=/Users/Chad/Documents/workspace/java/PDC/PDC_BlackJack_GUI
 os.name=Mac OS X
 os.arch=x86_64
-os.version=10.11
+os.version=10.11.1
 derby.system.home=null
 Database Class Loader started - derby.database.classpath=''

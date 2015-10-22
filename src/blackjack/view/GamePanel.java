@@ -43,6 +43,9 @@ public class GamePanel extends BasePanel
     private JPanel betButtonPanel;
     public static JTextField betField;
     private JPanel playButtonPanel;
+    private static JButton hitButton;
+    private static JButton standButton;
+    private static JButton doubleButton;
     
     public GamePanel()
     {
@@ -87,7 +90,7 @@ public class GamePanel extends BasePanel
         playerDeckOneContainer = new CardDeckContainer();
         playerStatOneContainer = new JPanel(new BorderLayout());
         playerStatOneContainer.setOpaque(false);
-        JLabel playerStatOneTitle = new JLabel("Player Hand 1");
+        JLabel playerStatOneTitle = new JLabel("Player in Hand");
         playerStatOneTitle.setForeground(Color.WHITE);
         playerStatOneTitle.setHorizontalAlignment(JLabel.CENTER);
         playerStatOneTitle.setFont(new Font("", Font.PLAIN, 12));
@@ -145,9 +148,9 @@ public class GamePanel extends BasePanel
         JButton betButton = new JButton("bet");
         betButtonPanel.add(betButton);
         betButtonPanel.setOpaque(false);
-        JButton hitButton = new JButton("Hit");
-        JButton standButton = new JButton("Stand");
-        JButton doubleButton = new JButton("Double");
+        hitButton = new JButton("Hit");
+        standButton = new JButton("Stand");
+        doubleButton = new JButton("Double");
         //JButton splitButton = new JButton("Split");
         //splitButton.setEnabled(false);
         playButtonPanel.add(hitButton);
@@ -185,8 +188,11 @@ public class GamePanel extends BasePanel
                     User.deleteUserByName(BlackJack.player.getName());
                     BlackJack.player = new Player(true);
                     BlackJack.dealer = new Player(false);
-                    BlackjackFrame.cardLayout.show(BlackJack.gameFrame, "newgame");
+                    BlackjackFrame.cardLayout.show(getParent(), "welcome");
                 }
+                hitButton.setEnabled(true);
+                standButton.setEnabled(true);
+                doubleButton.setEnabled(true);
                 BlackJack.player.setBet(0);
                 BlackJack.player.setDoubled(false);
                 BlackJack.player.setInsured(false);
@@ -228,6 +234,20 @@ public class GamePanel extends BasePanel
             public void actionPerformed(ActionEvent e)
             {
                 Game.hit();
+            }
+        });
+        
+        standButton.addActionListener(new ActionListener()
+        {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                hitButton.setEnabled(false);
+                standButton.setEnabled(false);
+                doubleButton.setEnabled(false);
+                playerStatOneDescription.setText("Stand");
+                playerStatOneDescription.repaint();
+                Game.dealerGame();
             }
         });
     }

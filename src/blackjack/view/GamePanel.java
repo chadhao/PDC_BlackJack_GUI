@@ -221,6 +221,15 @@ public class GamePanel extends BasePanel
                 Game.bet(Integer.parseInt(betField.getText()));
             }
         });
+        
+        hitButton.addActionListener(new ActionListener()
+        {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                Game.hit();
+            }
+        });
     }
     
 }

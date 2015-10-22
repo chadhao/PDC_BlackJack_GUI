@@ -8,6 +8,7 @@ package blackjack.controller;
 import blackjack.*;
 import blackjack.model.*;
 import blackjack.view.*;
+import java.awt.Graphics;
 import javax.swing.JOptionPane;
 
 /**
@@ -185,6 +186,8 @@ public class Game
             if (choice == JOptionPane.YES_OPTION)
             {
                 BlackJack.player.setChip(BlackJack.player.getChip() - BlackJack.player.getBet(1)/2);
+                GamePanel.playerStatOneDescription.setText("Insured");
+                GamePanel.playerStatOneDescription.repaint();
                 if (totalValue(0) == 21)
                 {
                     isDealersTurn = true;
@@ -223,5 +226,23 @@ public class Game
                 }
             }
         }
+    }
+    
+    public static void hit()
+    {
+        BlackJack.player.getHandOne().add(Card.dealCard());
+        GamePanel.playerDeckOneContainer.removeAll();
+        GamePanel.playerStatOnePoint.setText(totalValue(1) + " points");
+        GamePanel.playerStatOneDescription.setText("Hit");
+        GamePanel.playerDeckOneContainer.add(GamePanel.playerStatOneContainer);
+        GamePanel.playerDeckOneContainer.add(new CardDeckPanel(Card.generateCardArray(1)));
+        GamePanel.playerDeckOneContainer.repaint();
+        GamePanel.playerDeckOneContainer.revalidate();
+        
+    }
+    
+    public static void checkBusted()
+    {
+        
     }
 }

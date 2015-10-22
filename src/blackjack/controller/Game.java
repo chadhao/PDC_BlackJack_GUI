@@ -238,11 +238,20 @@ public class Game
         GamePanel.playerDeckOneContainer.add(new CardDeckPanel(Card.generateCardArray(1)));
         GamePanel.playerDeckOneContainer.repaint();
         GamePanel.playerDeckOneContainer.revalidate();
-        
+        checkBusted();
     }
     
     public static void checkBusted()
     {
-        
+        if (totalValue(1) > 21)
+        {
+            GamePanel.playerStatOnePoint.setText(totalValue(1) + " points");
+            GamePanel.playerStatOneDescription.setText("Busted");
+            GamePanel.playerDeckOneContainer.repaint();
+            GamePanel.playerDeckOneContainer.revalidate();
+            BlackJack.player.addLose();
+            JOptionPane.showMessageDialog(null, "You busted!", "Information", JOptionPane.INFORMATION_MESSAGE);
+            GamePanel.cardLayout.show(GamePanel.gameButtonPanel, "betbutton");
+        }
     }
 }

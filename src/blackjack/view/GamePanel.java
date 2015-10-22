@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package blackjack.view;
 
 import java.awt.*;
@@ -15,39 +11,96 @@ import blackjack.model.*;
 import blackjack.controller.*;
 
 /**
+ * The Class GamePanel.
  *
- * @author Chad
  */
 public class GamePanel extends BasePanel
 {
+    
+    /** The Constant CARD_BACK. */
     private static final ArrayList<CardPanel> CARD_BACK = new ArrayList<CardPanel>();
+    
+    /** The dealer deck container. */
     public static CardDeckContainer dealerDeckContainer;
+    
+    /** The player deck one container. */
     public static CardDeckContainer playerDeckOneContainer;
+    
+    /** The player deck two container. */
     public static CardDeckContainer playerDeckTwoContainer;
+    
+    /** The dealer deck panel. */
     public static CardDeckPanel dealerDeckPanel;
+    
+    /** The player deck one panel. */
     public static CardDeckPanel playerDeckOnePanel;
+    
+    /** The player deck two panel. */
     public static CardDeckPanel playerDeckTwoPanel;
+    
+    /** The dealer stat container. */
     public static JPanel dealerStatContainer;
+    
+    /** The dealer stat point. */
     public static JLabel dealerStatPoint = new JLabel();
+    
+    /** The player stat one container. */
     public static JPanel playerStatOneContainer;
+    
+    /** The player stat one point. */
     public static JLabel playerStatOnePoint = new JLabel();
+    
+    /** The player stat one description. */
     public static JLabel playerStatOneDescription = new JLabel();
+    
+    /** The player stat two container. */
     public static JPanel playerStatTwoContainer;
+    
+    /** The player stat two point. */
     public static JLabel playerStatTwoPoint = new JLabel();
+    
+    /** The player stat two description. */
     public static JLabel playerStatTwoDescription = new JLabel();
+    
+    /** The game stat panel. */
     public static JPanel gameStatPanel;
+    
+    /** The game stat panel player name. */
     public static JLabel gameStatPanelPlayerName;
+    
+    /** The game stat panel current chips. */
     public static JLabel gameStatPanelCurrentChips;
+    
+    /** The game stat panel current bet. */
     public static JLabel gameStatPanelCurrentBet;
+    
+    /** The game button panel. */
     public static JPanel gameButtonPanel;
+    
+    /** The Constant cardLayout. */
     public static final CardLayout cardLayout = new CardLayout();
+    
+    /** The bet button panel. */
     private JPanel betButtonPanel;
+    
+    /** The bet field. */
     public static JTextField betField;
+    
+    /** The play button panel. */
     private JPanel playButtonPanel;
+    
+    /** The hit button. */
     private static JButton hitButton;
+    
+    /** The stand button. */
     private static JButton standButton;
+    
+    /** The double button. */
     private static JButton doubleButton;
     
+    /**
+     * Instantiates a new game panel.
+     */
     public GamePanel()
     {
         super();

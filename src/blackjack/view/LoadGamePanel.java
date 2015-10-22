@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package blackjack.view;
 
 import java.awt.*;
@@ -14,16 +10,29 @@ import javax.swing.event.ListDataEvent;
 import javax.swing.event.ListDataListener;
 
 /**
+ * The Class LoadGamePanel.
  *
- * @author Chad
  */
 public class LoadGamePanel extends BasePanel
 {
+    
+    /** The saved list. */
     private JList<String> savedList;
+    
+    /** The play button. */
     private JButton playButton;
+    
+    /** The back button. */
     private JButton backButton;
+    
+    /** The saved data. */
     private String[] savedData;
     
+    /**
+     * Instantiates a new load game panel.
+     *
+     * @param imgSrc the img src
+     */
     public LoadGamePanel(String imgSrc)
     {
         super(imgSrc);

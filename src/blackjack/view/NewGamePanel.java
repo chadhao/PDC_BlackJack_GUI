@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package blackjack.view;
 
 import java.awt.*;
@@ -12,17 +8,32 @@ import blackjack.controller.*;
 import blackjack.*;
 
 /**
+ * The Class NewGamePanel.
  *
- * @author Chad
  */
 public class NewGamePanel extends BasePanel
 {
+    
+    /** The name label. */
     private JLabel nameLabel;
+    
+    /** The name field. */
     private JTextField nameField;
+    
+    /** The play button. */
     private JButton playButton;
+    
+    /** The back button. */
     private JButton backButton;
+    
+    /** The msg box. */
     private JDialog msgBox;
     
+    /**
+     * Instantiates a new new game panel.
+     *
+     * @param imgSrc the img src
+     */
     public NewGamePanel(String imgSrc)
     {
         super(imgSrc);

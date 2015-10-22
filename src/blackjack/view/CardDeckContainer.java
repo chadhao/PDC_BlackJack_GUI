@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package blackjack.view;
 
 import java.awt.*;
@@ -10,11 +6,17 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
 /**
+ * The Class CardDeckContainer.
  *
- * @author Chad
  */
 public class CardDeckContainer extends JComponent
 {
+    
+    /**
+     * Instantiates a new card deck container.
+     *
+     * @param contentPanel the content panel
+     */
     public CardDeckContainer(CardDeckPanel contentPanel)
     {
         setBorder(new EmptyBorder(10, 0, 10, 0));
@@ -23,6 +25,9 @@ public class CardDeckContainer extends JComponent
         add(contentPanel);
     }
 
+    /**
+     * Instantiates a new card deck container.
+     */
     public CardDeckContainer()
     {
         setBorder(new EmptyBorder(10, 0, 10, 0));
@@ -30,6 +35,9 @@ public class CardDeckContainer extends JComponent
         setOpaque(false);
     }
 
+    /* (non-Javadoc)
+     * @see javax.swing.JComponent#getPreferredSize()
+     */
     @Override
     public Dimension getPreferredSize()
     {

@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package blackjack.view;
 
 import java.awt.*;
@@ -13,15 +9,24 @@ import blackjack.*;
 import blackjack.controller.*;
 
 /**
+ * The Class BlackjackFrame is the basic frame of the game.
  *
- * @author Chad
  */
 public class BlackjackFrame extends JFrame
 {
+    
+    /** The Constant DEFAULT_WIDTH. */
     public static final int DEFAULT_WIDTH = 450;
+    
+    /** The Constant DEFAULT_HEIGHT. */
     public static final int DEFAULT_HEIGHT = 600;
+    
+    /** The Constant cardLayout. */
     public static final CardLayout cardLayout = new CardLayout();
 
+    /**
+     * Instantiates a new blackjack frame.
+     */
     public BlackjackFrame()
     {
         setSize(DEFAULT_WIDTH, DEFAULT_HEIGHT);

@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package blackjack.controller;
 
 import blackjack.model.*;
@@ -11,18 +7,33 @@ import java.sql.*;
 import java.util.ArrayList;
 
 /**
+ * The Class User is used to exchange data between database and Player class.
  *
- * @author Chad
  */
 public class User
 {
+    
+    /** The id. */
     private int id;
+    
+    /** The username. */
     private String username;
+    
+    /** The chips. */
     private int chips;
+    
+    /** The win. */
     private int win;
+    
+    /** The lose. */
     private int lose;
+    
+    /** The push. */
     private int push;
     
+    /**
+     * Instantiates a new user.
+     */
     public User()
     {
         id = 0;
@@ -33,6 +44,16 @@ public class User
         push = 0;
     }
     
+    /**
+     * Instantiates a new user.
+     *
+     * @param id the id
+     * @param username the username
+     * @param chips the chips
+     * @param win the win
+     * @param lose the lose
+     * @param push the push
+     */
     public User(int id, String username, int chips, int win, int lose, int push)
     {
         this.id = id;
@@ -43,6 +64,12 @@ public class User
         this.push = push;
     }
     
+    /**
+     * Check username.
+     *
+     * @param username the username
+     * @return true, if the username is illegal
+     */
     public static boolean checkUsername(String username)
     {
         for (char aChar : username.toCharArray())
@@ -56,6 +83,11 @@ public class User
         return true;
     }
     
+    /**
+     * Checks if database is empty.
+     *
+     * @return true, if database is empty
+     */
     public static boolean isDatabaseEmpty()
     {
         try
@@ -76,6 +108,12 @@ public class User
         return false;
     }
     
+    /**
+     * Checks for user in database.
+     *
+     * @param username the username
+     * @return true, if the user exists in database
+     */
     public static boolean hasUser(String username)
     {
         try
@@ -97,6 +135,12 @@ public class User
         return false;
     }
     
+    /**
+     * Gets the user by name from database.
+     *
+     * @param username the username
+     * @return a User object if the user exists in database
+     */
     public static User getUserByName(String username)
     {
         int ID;
@@ -124,6 +168,11 @@ public class User
         return null;
     }
     
+    /**
+     * Gets the user list.
+     *
+     * @return the user list
+     */
     public static String[] getUserList()
     {
         ArrayList<String> userList = new ArrayList<>();
@@ -144,6 +193,11 @@ public class User
         return stringArray;
     }
     
+    /**
+     * Initial the player.
+     *
+     * @param username the username
+     */
     public static void initPlayer(String username)
     {
         User aUser = getUserByName(username);
@@ -154,6 +208,12 @@ public class User
         BlackJack.player.setPush(aUser.getPush());
     }
     
+    /**
+     * Add a user to database.
+     *
+     * @param username the username
+     * @return true, if successful
+     */
     public static boolean addUser(String username)
     {
         String SQLCommand = "INSERT INTO USERS (USERNAME, CHIPS) VALUES (\'" + username + "\', 1000)";
@@ -168,6 +228,12 @@ public class User
         return true;
     }
     
+    /**
+     * Delete user by name.
+     *
+     * @param username the username
+     * @return true, if successful
+     */
     public static boolean deleteUserByName(String username)
     {
         String SQLCommand = "DELETE FROM USERS WHERE USERNAME = \'" + username + "\'";
@@ -182,6 +248,9 @@ public class User
         return true;
     }
     
+    /**
+     * Update user.
+     */
     public static void updateUser()
     {
         String name = BlackJack.player.getName();
@@ -204,31 +273,61 @@ public class User
         }
     }
     
+    /**
+     * Gets the user id.
+     *
+     * @return the id
+     */
     public int getID()
     {
         return id;
     }
     
+    /**
+     * Gets the username.
+     *
+     * @return the username
+     */
     public String getUsername()
     {
         return username;
     }
     
+    /**
+     * Gets the chips.
+     *
+     * @return the chips
+     */
     public int getChips()
     {
         return chips;
     }
     
+    /**
+     * Gets the win.
+     *
+     * @return the win
+     */
     public int getWin()
     {
         return win;
     }
     
+    /**
+     * Gets the lose.
+     *
+     * @return the lose
+     */
     public int getLose()
     {
         return lose;
     }
     
+    /**
+     * Gets the push.
+     *
+     * @return the push
+     */
     public int getPush()
     {
         return push;

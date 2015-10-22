@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package blackjack.controller;
 
 import blackjack.*;
@@ -11,13 +7,18 @@ import blackjack.view.*;
 import javax.swing.JOptionPane;
 
 /**
+ * The Class Game.
  *
- * @author Chad
  */
 public class Game
 {
+    
+    /** The is dealers turn. */
     public static boolean isDealersTurn = false;
     
+    /**
+     * Initial the game.
+     */
     public static void initGame()
     {
         Card.shuffleCards();
@@ -32,6 +33,11 @@ public class Game
         GamePanel.playerDeckOneContainer.repaint();
     }
     
+    /**
+     * Bet a hand.
+     *
+     * @param bet chips to bet
+     */
     public static void bet(int bet)
     {
         isDealersTurn = false;
@@ -74,12 +80,14 @@ public class Game
         }
     }
     
+    /**
+     * Get how many Aces in a hand.
+     *
+     * @param whichHand 0: dealer's hand / 1: player's first hand / 2: player's second hand
+     * @return number of Aces
+     */
     private static int getAce(int whichHand)
     {
-        //0: dealer's hand
-        //1: player's first hand
-        //2: player's second hand
-        
     	int numOfAce = 0;
         if (whichHand == 0)
         {
@@ -114,12 +122,14 @@ public class Game
     	return numOfAce;
     }
     
+    /**
+     * Get total value of a hand.
+     *
+     * @param whichHand 0: dealer's hand / 1: player's first hand / 2: player's second hand
+     * @return total value of the chosen hand
+     */
     public static int totalValue(int whichHand)
     {
-        //0: dealer's hand
-        //1: player's first hand
-        //2: player's second hand
-        
         int totalValue = 0;
         if (whichHand == 0)
         {
@@ -153,11 +163,15 @@ public class Game
     	return totalValue;
     }
     
+    /**
+     * Check if a hand is blackjack.
+     *
+     * @param whichHand 1: player's first hand / 2: player's second hand
+     * @return true, if chosen hand is blackjack
+     */
     public static boolean checkBlackjack(int whichHand)
     {
-        //1: player hand 1
-        //2: player hand 2
-        
+
         if (totalValue(1) == 21 && totalValue(0) != 21)
         {
             isDealersTurn = true;
@@ -189,6 +203,9 @@ public class Game
         return false;
     }
     
+    /**
+     * Check if player can insure this hand.
+     */
     public static void checkInsure()
     {
         if (BlackJack.dealer.getHandOne().isEmpty())
@@ -245,6 +262,9 @@ public class Game
         }
     }
     
+    /**
+     * Hit a hand.
+     */
     public static void hit()
     {
         BlackJack.player.getHandOne().add(Card.dealCard());
@@ -258,6 +278,12 @@ public class Game
         checkBusted(1);
     }
     
+    /**
+     * Check is a hand is busted.
+     *
+     * @param whichHand 0: dealer's hand / 1: player's first hand / 2: player's second hand
+     * @return true, if the chosen hand is busted
+     */
     public static boolean checkBusted(int whichHand)
     {
         if (whichHand == 1 && totalValue(whichHand) > 21)
@@ -284,6 +310,9 @@ public class Game
         return false;
     }
     
+    /**
+     * Dealer's game.
+     */
     public static void dealerGame()
     {
         JOptionPane.showMessageDialog(null, "It is dealer\'s turn now.", "Information", JOptionPane.INFORMATION_MESSAGE);
@@ -311,6 +340,9 @@ public class Game
         }
     }
     
+    /**
+     * Judge if the player wins.
+     */
     public static void judge()
     {
         if (totalValue(0) == totalValue(1))
@@ -335,6 +367,11 @@ public class Game
         }
     }
     
+    /**
+     * Double down a hand.
+     *
+     * @return true, if the hand is doubled down successfully
+     */
     public static boolean doubleDown()
     {
         if (BlackJack.player.getChip() < BlackJack.player.getBet(0))

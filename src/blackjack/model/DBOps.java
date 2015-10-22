@@ -1,21 +1,24 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package blackjack.model;
 
 import java.sql.*;
 import java.util.*;
 
 /**
+ * The Class DBOps is used to initialize database connection and execute SQL commands.
  *
- * @author Chad
  */
 public class DBOps
 {
+    
+    /** The connection. */
     public static Connection conn;
     
+    /**
+     * Initial the connection.
+     *
+     * @throws SQLException the SQL exception
+     */
     public static void initConnection() throws SQLException
     {
         try
@@ -37,6 +40,13 @@ public class DBOps
         
     }
     
+    /**
+     * Execute update.
+     *
+     * @param SQLCommand the SQL command
+     * @return the integer representation of the execution status
+     * @throws SQLException the SQL exception
+     */
     public static int exeUpdate(String SQLCommand) throws SQLException
     {
         if (conn == null)
@@ -47,6 +57,13 @@ public class DBOps
         return stat.executeUpdate(SQLCommand);
     }
     
+    /**
+     * Execute query.
+     *
+     * @param SQLCommand the SQL command
+     * @return the result set
+     * @throws SQLException the SQL exception
+     */
     public static ResultSet exeQuery(String SQLCommand) throws SQLException
     {
         if (conn == null)

@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package blackjack.model;
 
 import blackjack.view.*;
@@ -11,16 +7,28 @@ import blackjack.*;
 import java.util.*;
 
 /**
+ * The Class Card is to generate and store all cards.
  *
- * @author Chad
  */
 public class Card {
+    
+    /** The Constant NUM_OF_SET. */
     public static final int NUM_OF_SET = 1;
+    
+    /** The Constant SUIT. */
     private static final String[] SUIT = {"S", "H", "C", "D"};
+    
+    /** The Constant RANK. */
     private static final String[] RANK = {"2", "3", "4", "5", "6",
         "7", "8", "9", "T", "J", "Q", "K", "A"};
+    
+    /** The power. */
     public static HashMap power = new HashMap();
+    
+    /** The card. */
     private static String[] card = new String[52*Card.NUM_OF_SET];
+    
+    /** The card now. */
     private static int cardNow;
     
     static
@@ -55,6 +63,9 @@ public class Card {
         cardNow = 0;
     }
     
+    /**
+     * Shuffle cards.
+     */
     public static void shuffleCards()
     {
         int r;
@@ -71,32 +82,56 @@ public class Card {
         cardNow = 0;
     }
     
+    /**
+     * Gets a card.
+     *
+     * @param index the index of a card
+     * @return the card name
+     */
     public static String getCard(int index)
     {
         return card[index];
     }
     
+    /**
+     * Gets the card value.
+     *
+     * @param index the index of a card
+     * @return the value of the card
+     */
     public static int getValue(int index)
     {
         return (int)power.get(String.valueOf(getCard(index).charAt(0)));
     }
     
+    /**
+     * Deal card.
+     *
+     * @return the position of the card in card deck
+     */
     public static int dealCard()
     {
         return ++cardNow-1;
     }
     
+    /**
+     * Gets the card now.
+     *
+     * @return the card now
+     */
     public static int getCardNow()
     {
         return cardNow;
     }
     
+    /**
+     * Generate card array.
+     *
+     * @param whichHand 0: dealer's hand / 1: player's first hand / 2: player's second hand
+     * @return an ArrayList of image representation of the chosen hand
+     */
     public static ArrayList<CardPanel> generateCardArray(int whichHand)
     {
-        //0: dealer's hand
-        //1: player's first hand
-        //2: player's second hand
-        
         ArrayList<CardPanel> cardsInHand = new ArrayList<>();
         if (whichHand == 0)
         {

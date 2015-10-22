@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package blackjack;
 
 import blackjack.controller.*;
@@ -12,14 +8,23 @@ import java.awt.EventQueue;
 import java.sql.*;
 
 /**
+ * The Class BlackJack.
  *
- * @author Chad
  */
 public class BlackJack {
+    
+    /** The Constant IMG_SRC. */
     private static final String IMG_SRC = "img/bg.png";
+    
+    /** The player. */
     public static Player player;
+    
+    /** The dealer. */
     public static Player dealer;
+    
     /**
+     * The main method.
+     *
      * @param args the command line arguments
      */
     public static void main(String[] args) {

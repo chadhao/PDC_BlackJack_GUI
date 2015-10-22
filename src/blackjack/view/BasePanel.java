@@ -1,33 +1,46 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package blackjack.view;
 
 import java.awt.*;
 import javax.swing.*;
 
 /**
+ * The Class BasePanel.
  *
- * @author Chad
  */
 public class BasePanel extends JComponent
 {
+    
+    /** The background image. */
     private Image bgImage;
+    
+    /** The Constant WIDTH. */
     public static final int WIDTH = 450;
+    
+    /** The Constant HEIGHT. */
     public static final int HEIGHT = 600;
 
+    /**
+     * Instantiates a new base panel.
+     */
     public BasePanel()
     {
         bgImage = null;
     }
     
+    /**
+     * Instantiates a new base panel.
+     *
+     * @param imgSrc the img src
+     */
     public BasePanel(String imgSrc)
     {
         bgImage = new ImageIcon(imgSrc).getImage();
     }
     
+    /* (non-Javadoc)
+     * @see javax.swing.JComponent#paintComponent(java.awt.Graphics)
+     */
     @Override
     public void paintComponent(Graphics g)
     {
@@ -42,6 +55,9 @@ public class BasePanel extends JComponent
         }
     }
     
+    /* (non-Javadoc)
+     * @see javax.swing.JComponent#getPreferredSize()
+     */
     @Override
     public Dimension getPreferredSize()
     {

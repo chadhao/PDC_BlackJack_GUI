@@ -6,6 +6,7 @@
 package blackjack.model;
 
 import java.sql.*;
+import java.util.*;
 
 /**
  *
@@ -13,25 +14,45 @@ import java.sql.*;
  */
 public class DBOps
 {
-    public final static String url = "jdbc:derby://localhost:1527/blackjack";
-    public final static String username = "blackjack";
-    public final static String password = "blackjack";
+    public static Connection conn;
     
-    public static Connection getConnection() throws SQLException
+    public static void initConnection() throws SQLException
     {
-        return DriverManager.getConnection(DBOps.url, DBOps.username, DBOps.password);
+        try
+        {
+            Class.forName("org.apache.derby.jdbc.EmbeddedDriver").newInstance();
+            Properties props = new Properties();
+            props.put("user", "blackjack");
+            props.put("password", "blackjack");
+            conn = DriverManager.getConnection("jdbc:derby:BLACKJACK;create=true", props);
+            conn.setAutoCommit(false);
+            Statement stat = conn.createStatement();
+            stat.execute("create table users(id integer not null generated always as identity (start with 1, increment by 1) primary key,username varchar(256) not null,chips integer not null,win integer default 0 not null,lose integer default 0 not null,push integer default 0 not null)");
+            System.out.println("DB setup done!");
+        }
+        catch (ClassNotFoundException | IllegalAccessException | InstantiationException | SQLException e)
+        {
+            e.printStackTrace();
+        }
+        
     }
     
     public static int exeUpdate(String SQLCommand) throws SQLException
     {
-        Connection conn = getConnection();
+        if (conn == null)
+        {
+            initConnection();
+        }
         Statement stat = conn.createStatement();
         return stat.executeUpdate(SQLCommand);
     }
     
     public static ResultSet exeQuery(String SQLCommand) throws SQLException
     {
-        Connection conn = getConnection();
+        if (conn == null)
+        {
+            initConnection();
+        }
         Statement stat = conn.createStatement();
         return stat.executeQuery(SQLCommand);
     }

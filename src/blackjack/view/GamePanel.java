@@ -191,6 +191,7 @@ public class GamePanel extends BasePanel
             @Override
             public void componentShown(ComponentEvent e)
             {
+                betField.setText("");
                 if (BlackJack.player.getChip() <= 0)
                 {
                     JOptionPane.showMessageDialog(null, "You are penniless!", "Information", JOptionPane.INFORMATION_MESSAGE);
